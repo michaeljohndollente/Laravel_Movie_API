@@ -1,0 +1,36 @@
+/* html{
+
+} */
+
+body{
+    background:#f1f1f1;
+}
+
+/* Header */
+.header{
+    padding: 0px 0px 20px 0px;  
+    font-weight: 900;
+}
+
+.navbar{
+    background-color: #fdb827;
+}
+
+.navbar a,li{
+    color: #23120b;
+}
+.body h1{
+    color: #23120b;
+}
+.btn.btn-primary{
+    background: #21209c;
+}
+
+tr td, tr th{
+    color: #23120b;
+    text-align: center;
+}
+
+.body #con table{ 
+    width: 90%;
+}
