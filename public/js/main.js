@@ -5,7 +5,7 @@ $('.link').on('click', (function (e) {
         url: "/api/" + link, 
         // error: function(response){
         //     console.log(response)
-        // },
+        // }
         success: function(response){
             let template = ''
             switch (link) {
@@ -13,7 +13,7 @@ $('.link').on('click', (function (e) {
                     template = ` 
                     <title>Movies</title>
                     <h1>Movies</h1>
-                    <button class="btn btn-primary" type="submit">Add Movie</button><br><br>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add Movie</button><br><br>
                     <table class="table table-hover mx-auto">
                         <thead>
                             <tr>
@@ -28,7 +28,6 @@ $('.link').on('click', (function (e) {
                             </tr>
                         </thead>
                         <tbody id="movieData">
-
                         </tbody>
                     </table>
                     `;
@@ -47,6 +46,8 @@ $('.link').on('click', (function (e) {
                         </tr>
                         `)
                     });
+                    $('#con').append(modals.movie);
+
                     break;
 
                     case 'actor':
@@ -162,7 +163,6 @@ $('.link').on('click', (function (e) {
                             </tr>
                         </thead>
                         <tbody id="movieData">
-
                         </tbody>
                     </table>
                     `;
@@ -181,12 +181,22 @@ $('.link').on('click', (function (e) {
                         `)
                     });
                     break;
-
-
-            
                 default:
                     break;
             }
         },
     });
 }));
+const modals = {
+    movie:`
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <p>kinginamo</p>
+        </div>
+      </div>
+    </div>`
+}
+
+
