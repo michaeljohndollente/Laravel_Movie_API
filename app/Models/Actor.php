@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Actor extends Model
 {
-    public $timestamps = false;
-    protected $fillable = ['fname', 'lname', 'note', 'imgpath'];
     use HasFactory;
+    protected $fillable = ['fname', 'lname', 'note', 'imgpath'];
+    public $timestamps = false;
 
     public function role()
     {
