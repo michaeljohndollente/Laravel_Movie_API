@@ -32,16 +32,16 @@ $('.linkIndex').on('click', (function (e) {
                     </table>
                     `;
                     $('#con').html(template);
-                    response.forEach(element => {
+                    response.forEach(movie => {
                         $('#movieData').append(`
                         <tr>
-                            <td>${element.id}</td>
-                            <td>${element.imgpath}</td>
-                            <td>${element.title}</td>
-                            <td>${element.description}</td>
-                            <td>${element.release}</td>
-                            <td>${element.genre_id}</td>
-                            <td>${element.producer_id}</td>
+                            <td>${movie.id}</td>
+                            <td>${movie.imgpath}</td>
+                            <td>${movie.title}</td>
+                            <td>${movie.description}</td>
+                            <td>${movie.release}</td>
+                            <td>${movie.genre_id['genres']}</td>
+                            <td>${movie.producer_id['producers']}</td>
                             <td></td>
                         </tr>
                         `)
@@ -160,13 +160,11 @@ const modals = {
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Create New Movie</h2>
-                <button type="button" class="btn-close" daba-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
             </div>
-
             <div class="modal-body">
                 <form id="createMovieForm" method="post" action="{{route('movie.store')}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
                     <div class="form-group">
                             <label for="imgpath" class="control-label">Upload Image</label>
                                 <div class="custom-file">
@@ -182,14 +180,32 @@ const modals = {
                             <label for="description" class="control-label">Description</label>
                             <input type="text" class="form-control" id="description" name="description" value="">
                         </div>
-                        <div class="md-form  md-outline input-with-post-icon datepicker">
+                        <div class="md-form form-group md-outline input-with-post-icon datepicker">
                             <label for="Release">Release</label>
                             <input placeholder="Select date" type="date" id="release" class="form-control" name="release" value=""> 
                         </div>
 
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="producer">Producer</label>
+                                <select class=form-control name="producer_id" value="$producers">
+
+                                </select>
+                                <!-- {!! Form::select('producer_id', $producers, null, ['class' => 'form-control']) !!} -->
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="genre">Genre</label>
+                                <select class=form-control name="genre_id" value="$genres">
+                                
+                                </select>
+                                <!-- {!! Form::select('genre_id', $genres, null, ['class' => 'form-control']) !!} -->
+                            </div>
+                        </div>
+
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-bs-dismiss="modal>Close</button>
-                            <button type="submit" id="movieSubmit" class="btn btn-primary" data-bs-dismiss="modal>save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Close</button>
+                            <button type="submit" id="movieSubmit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
                         </div>
                     </div>
                 </form>                
