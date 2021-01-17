@@ -7,6 +7,7 @@ $('.linkIndex').on('click', (function (e) {
             console.log(response)
         },
         success: function(response){
+            console.log(response)
             let template = ''
             switch (link) {
                 case 'movie':
@@ -40,13 +41,24 @@ $('.linkIndex').on('click', (function (e) {
                             <td>${movie.title}</td>
                             <td>${movie.description}</td>
                             <td>${movie.release}</td>
-                            <td>${movie.genre_id['genres']}</td>
-                            <td>${movie.producer_id['producers']}</td>
+                            <td>${movie.genre['name']}</td>
+                            <td>${movie.producer['name']}</td>
                             <td></td>
                         </tr>
                         `)
                     });
                     $('#con').append(modals.movie);
+                    response.forEach(genre =>{
+                        $('#GenreIDName').append(`
+                            <option value="${genre['id']}">${genre['name']}</option>
+                        `)
+                    });
+                    $('#con').append(modals.movie);
+                    response.forEach(producer =>{
+                        $('#ProducerIDName').append(`
+                            <option value="${producer['id']}">${producer['name']}</option>
+                        `)
+                    });
                     break;
 
                     case 'actor':
@@ -71,14 +83,14 @@ $('.linkIndex').on('click', (function (e) {
                     </table>
                     `;
                     $('#con').html(template);
-                    response.forEach(element => {
+                    response.forEach(actor => {
                         $('#actorData').append(`
                         <tr>
-                            <td>${element.id}</td>
-                            <td>${element.imgpath}</td>
-                            <td>${element.fname}</td>
-                            <td>${element.lname}</td>
-                            <td>${element.note}</td>
+                            <td>${actor.id}</td>
+                            <td>${actor.imgpath}</td>
+                            <td>${actor.fname}</td>
+                            <td>${actor.lname}</td>
+                            <td>${actor.note}</td>
                             <td></td>
                         </tr>
                         `)
@@ -104,11 +116,11 @@ $('.linkIndex').on('click', (function (e) {
                     </table>
                     `;
                     $('#con').html(template);
-                    response.forEach(element => {
+                    response.forEach(genre => {
                         $('#genreData').append(`
                         <tr>
-                            <td>${element.id}</td>
-                            <td>${element.name}</td>
+                            <td>${genre.id}</td>
+                            <td>${genre.name}</td>
                             <td></td>
                         </tr>
                         `)
@@ -135,19 +147,19 @@ $('.linkIndex').on('click', (function (e) {
                     </table>
                     `;
                     $('#con').html(template);
-                    response.forEach(element => {
+                    response.forEach(producer => {
                         $('#producerData').append(`
                         <tr>
-                            <td>${element.id}</td>
-                            <td>${element.name}</td>
-                            <td>${element.email}</td>
+                            <td>${producer.id}</td>
+                            <td>${producer.name}</td>
+                            <td>${producer.email}</td>
                             <td></td>
                         </tr>
                         `)
                     });
                     $('#con').append(modals.producer);
                     break;
-                default:
+                    default:
                     break;
             }
         },
@@ -178,7 +190,7 @@ const modals = {
                         </div>
                         <div class="form-group">
                             <label for="description" class="control-label">Description</label>
-                            <input type="text" class="form-control" id="description" name="description" value="">
+                            <textarea class="form-control" id="description" name="description" rows="3" value=""></textarea>
                         </div>
                         <div class="md-form form-group md-outline input-with-post-icon datepicker">
                             <label for="Release">Release</label>
@@ -188,18 +200,14 @@ const modals = {
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="producer">Producer</label>
-                                <select class=form-control name="producer_id" value="$producers">
-
+                                <select id="ProducerIDName" class="form-control">
                                 </select>
-                                <!-- {!! Form::select('producer_id', $producers, null, ['class' => 'form-control']) !!} -->
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="genre">Genre</label>
-                                <select class=form-control name="genre_id" value="$genres">
-                                
+                                <select id="GenreIDName" class="form-control">
                                 </select>
-                                <!-- {!! Form::select('genre_id', $genres, null, ['class' => 'form-control']) !!} -->
                             </div>
                         </div>
 
@@ -216,29 +224,103 @@ const modals = {
 
     actor:`
     <div class="modal fade bd-modal-lg" id="actorCreate" tabindex="-1" aria-labelledby="actorCreate" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <h2>Create New Actor</h2>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create New Actor</h2>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <form id="createActorForm" method="post" action="{{ route('actor.store') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <label for="imgpath" class="control-label">Upload Image</label>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imgpath" name="imgpath" value="">
+                                <label class="custom-file-label" for="imgpath">Choose file</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fname" class="control-label">First Name</label>
+                            <input type="text" class="form-control" id="fname" name="fname" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="lname" class="control-label">Last name</label>
+                            <input type="text" class="form-control " id="lname" name="lname" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="note">Note</label>
+                            <textarea class="form-control" id="note" name="note" rows="3" value=""></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"
+                                aria-label="Close">Close</button>
+                            <button type="submit" id="movieSubmit" class="btn btn-primary"
+                                data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>`,
 
     genre:`
     <div class="modal fade bd-modal-lg" id="genreCreate" tabindex="-1" aria-labelledby="genreCreate" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <h2>Create New Genre</h2>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create New Genre</h2>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <form id="createGenreForm" method="post" action="{{ route('genre.store') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"
+                                aria-label="Close">Close</button>
+                            <button type="submit" id="movieSubmit" class="btn btn-primary"
+                                data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>`,
     
     producer:`
-    <div class="modal fade bd-modal-lg" id="producerCreate" tabindex="-1" aria-labelledby="producerCreate" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <h2>Create New Producer</h2>
+    <div class="modal fade bd-modal-lg" id="producerCreate" tabindex="-1" aria-labelledby="producerCreate"
+    aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create New Producer</h2>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <form id="createProducerForm" method="post" action="{{ route('producer.store') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div>
+                            <label for="name" class="control-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"
+                                aria-label="Close">Close</button>
+                            <button type="submit" id="movieSubmit" class="btn btn-primary"
+                                data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>`,
 }
 

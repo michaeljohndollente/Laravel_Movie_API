@@ -8,6 +8,7 @@ use App\Models\Genre;
 use App\Models\Role;
 use App\Models\Rate;
 use App\Models\Producer;
+
 class MovieController extends Controller
 {
     /**
@@ -17,11 +18,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $producers = Producer::pluck('name', 'id');
-        $genres = Genre::pluck('name', 'id');
-        return Movie::all();
-        // return View::make('movies.create', compact('producers', 'genres'));
-        // return view('movies.index', ['movies' => Movie::all()]);
+        return Movie::with('genre', 'producer')->get();
     }
 
     /**
