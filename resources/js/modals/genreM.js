@@ -1,6 +1,5 @@
 export default function genreModals() {
     return `
-    
     <div class="modal fade" id="genreCreateModal" tabindex="-1" aria-labelledby="genreCreate" aria-hidden="true"
             data-backdrop="false">
             <div class="modal-dialog modal-lg">

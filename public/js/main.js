@@ -243,7 +243,7 @@ var genre = {
       },
       messages: {
         name: {
-          required: "First name is required!",
+          required: "Genre Name is required!",
           maxlength: "Only 45 characters"
         }
       },
@@ -309,7 +309,7 @@ var genre = {
       },
       messages: {
         name: {
-          required: "First name is required!",
+          required: "Genre Name is required!",
           maxlength: "Only 45 characters"
         }
       },
@@ -387,6 +387,8 @@ var genre = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actor */ "./resources/js/actor.js");
 /* harmony import */ var _genre__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./genre */ "./resources/js/genre.js");
+/* harmony import */ var _producer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./producer */ "./resources/js/producer.js");
+
 
 
 $(document).ready(function () {
@@ -456,6 +458,10 @@ $(document).ready(function () {
 
           case 'genre':
             _genre__WEBPACK_IMPORTED_MODULE_1__.default.show(response);
+            break;
+
+          case 'producer':
+            _producer__WEBPACK_IMPORTED_MODULE_2__.default.show(response);
             break;
           // case 'genre':
           // template = `
@@ -719,8 +725,206 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => /* binding */ genreModals
 /* harmony export */ });
 function genreModals() {
-  return "\n    \n    <div class=\"modal fade\" id=\"genreCreateModal\" tabindex=\"-1\" aria-labelledby=\"genreCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Genre</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"genreCreateForm\" id=\"genreCreateForm\">\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Genre Description</label>\n                                <input type=\"text\" class=\"form-control \" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"genreCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"data-cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"genreEditModal\" tabindex=\"-1\" aria-labelledby=\"genreEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Genre</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"genreEditForm\" id=\"genreEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Genre Description</label>\n                                <input type=\"text\" class=\"form-control genreName\" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn genreEditSave btn-color\" \n                                    id=\"genreEditSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n    \n    ";
+  return "\n    <div class=\"modal fade\" id=\"genreCreateModal\" tabindex=\"-1\" aria-labelledby=\"genreCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Genre</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"genreCreateForm\" id=\"genreCreateForm\">\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Genre Description</label>\n                                <input type=\"text\" class=\"form-control \" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"genreCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"data-cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"genreEditModal\" tabindex=\"-1\" aria-labelledby=\"genreEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Genre</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"genreEditForm\" id=\"genreEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Genre Description</label>\n                                <input type=\"text\" class=\"form-control genreName\" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn genreEditSave btn-color\" \n                                    id=\"genreEditSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n    \n    ";
 }
+
+/***/ }),
+
+/***/ "./resources/js/modals/producerM.js":
+/*!******************************************!*\
+  !*** ./resources/js/modals/producerM.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ producerModals
+/* harmony export */ });
+function producerModals() {
+  return "\n    <div class=\"modal fade\" id=\"producerCreateModal\" tabindex=\"-1\" aria-labelledby=\"producerCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Producer</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"producerCreateForm\" id=\"producerCreateForm\">\n                            <div class=\"form-group\">\n                                <label for=\"name\" class=\"control-label\">Producer Name</label>\n                                <input type=\"text\" class=\"form-control \" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"name\" class=\"control-label\">Email</label>\n                                <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"producerCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"data-cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"producerEditModal\" tabindex=\"-1\" aria-labelledby=\"producerEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Producer</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"producerEditForm\" id=\"producerEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"name\" class=\"control-label\">Producer Name</label>\n                                <input type=\"text\" class=\"form-control producerName\" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"name\" class=\"control-label\">Email</label>\n                                <input type=\"email\" class=\"form-control producerEmail\" id=\"email\" name=\"email\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn producerEditSave btn-color\" \n                                    id=\"producerEditSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n    \n    ";
+}
+
+/***/ }),
+
+/***/ "./resources/js/producer.js":
+/*!**********************************!*\
+  !*** ./resources/js/producer.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _modals_producerM__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modals/producerM */ "./resources/js/modals/producerM.js");
+
+var producer = {
+  show: function show(response) {
+    var template = "\n        <thead>\n            <tr>\n                <th>ID</th>\n                <th>Producer Name</th>\n                <th>Email</th>\n                <th>Actions</th>\n            </tr>\n        </thead>\n        <tbody id=\"producerData\"></tbody>\n    ";
+    var title = "<h1> Producers </h1>";
+    var headtitle = "<title> Producers </title>";
+    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-toggle=\"modal\" data-target=\"#producerCreateModal\"> Add New Producer </button>";
+    $('#headtitle').html(headtitle);
+    $('#title').html(title);
+    $('#createbtn').html(createbtn);
+    $('#tableContent').html(template);
+    $('#content').append(_modals_producerM__WEBPACK_IMPORTED_MODULE_0__.default); //View
+
+    response.forEach(function (producer) {
+      $('#producerData').append("\n                <tr>\n                    <td>".concat(producer.id, "</td>\n                    <td>").concat(producer.name, "</td>\n                    <td>").concat(producer.email, "</td>\n                    <td>\n                        <i class=\"fas fa-edit producerEditIcon\" data-toggle=\"modal\" \n                            data-target=\"#producerEditModal\" id=\"").concat(producer.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt producerDeleteIcon\" id=\"").concat(producer.id, "\"></i>\n                    </td>\n                </tr>\n            "));
+    });
+    var valcreate = $('#producerCreateForm').validate({
+      rules: {
+        name: {
+          required: true,
+          maxlength: 45
+        },
+        email: {
+          required: true,
+          maxlength: 60,
+          email: true
+        }
+      },
+      messages: {
+        name: {
+          required: "Genre Name is required!",
+          maxlength: "Only 45 characters"
+        },
+        email: {
+          required: "Email is required!",
+          maxlength: "Only 60 characters",
+          email: "Must be an email!"
+        }
+      },
+      errorPlacment: function errorPlacment(error, element) {
+        error.insertAfter(element);
+      }
+    });
+    valcreate.form(); //Create
+
+    $("#producerCreateSave").on('click', function (e) {
+      if (valcreate.form()) {
+        e.preventDefault();
+      }
+
+      var producer = $("#producerCreateForm").serialize();
+      $.ajax({
+        type: "POST",
+        url: "/api/producer",
+        data: producer,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function success(producer) {
+          // console.log(producer);
+          $('#genreCreateForm :input').each(function () {
+            var input = $(this);
+            input.val('');
+          });
+          $('#producerCreateModal').hide();
+          $('#producerData').append("\n                        <tr>\n                            <td>".concat(producer.id, "</td>\n                            <td>").concat(producer.name, "</td>\n                            <td>").concat(producer.email, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit producerEditIcon\" \n                                    data-toggle=\"modal\" data-target=\"#producerEditModal\"\n                                    id=\"").concat(producer.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt producerDeleteIcon\" \n                                    id=\"").concat(producer.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
+        } // error: function (response) {
+        //     console.log(response);
+        // },
+
+      });
+    }); //Edit
+
+    $('.producerEditIcon').on('click', function (e) {
+      var id = $(e.currentTarget).attr('id'); // console.log(id);
+
+      $.ajax({
+        type: 'GET',
+        url: '/api/producer/' + id + '/edit',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function success(producer) {
+          $('#id').val(producer.id);
+          $('.producerName').val(producer.name);
+          $('.producerEmail').val(producer.email);
+        } // error: function (response) {
+        //     console.log(response);
+        // },
+
+      });
+    });
+    var valedit = $('#producerEditForm').validate({
+      rules: {
+        name: {
+          required: true,
+          maxlength: 45
+        }
+      },
+      messages: {
+        name: {
+          required: "First name is required!",
+          maxlength: "Only 45 characters"
+        }
+      },
+      errorPlacment: function errorPlacment(error, element) {
+        error.insertAfter(element);
+      }
+    });
+    valedit.form(); //Save 
+
+    $("#producerEditSave").on('click', function (e) {
+      if (valedit.form()) {
+        e.preventDefault();
+      }
+
+      var id = $("#id").val();
+      var producerdata = $("#producerEditForm").serialize();
+      $.ajax({
+        type: "PUT",
+        url: "/api/producer/" + id,
+        data: producerdata,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function success() {
+          $('#producerEditModal').hide();
+          $.ajax({
+            url: '/api/producer',
+            success: function success(response) {
+              producer.show(response);
+            }
+          });
+        } // error: function (error) {
+        //     console.log(error);
+        // }
+
+      });
+    }); //Delete
+
+    $('.producerDeleteIcon').on('click', function (e) {
+      e.preventDefault();
+      var id = this.id;
+      var $tr = $(this).closest('tr'); // console.log(id);
+
+      if (confirm("Are you sure you want to delete Producer Number ".concat(id, "?"))) {
+        $.ajax({
+          type: "DELETE",
+          url: "/api/producer/" + id,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          dataType: "json",
+          success: function success(data) {
+            // console.log(data);
+            $tr.remove();
+          } // error:function(data){
+          //     console.log('Error:',data);
+          // }
+
+        });
+      }
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (producer);
 
 /***/ })
 

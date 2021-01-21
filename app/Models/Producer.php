@@ -9,7 +9,8 @@ class Producer extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'email'];
-
+    protected $primaryKey = 'id';
+    public $timestamps = false;
     public function movie()
     {
         return $this->hasMany(Movie::class);

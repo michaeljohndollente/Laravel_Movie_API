@@ -13,7 +13,8 @@ class ProducerController extends Controller
      */
     public function index()
     {
-        return Producer::all();
+        $producer = Producer::all();
+        return response()->json($producer);
     }
 
     /**
@@ -34,7 +35,8 @@ class ProducerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $producer = Producer::create($request->all());
+        return response()->json($producer);
     }
 
     /**
@@ -54,9 +56,10 @@ class ProducerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $producer, $id)
     {
-        //
+        $producer = Producer::find($id);
+        return response()->json($producer);
     }
 
     /**
@@ -68,7 +71,9 @@ class ProducerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $producer = Producer::find($id);
+        $producer = $producer->update($request->all());
+        return response()->json($producer);
     }
 
     /**
@@ -77,8 +82,9 @@ class ProducerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $producer, $id)
     {
-        //
+        $producer = Producer::find($id)->delete();
+        return response()->json($producer);
     }
 }

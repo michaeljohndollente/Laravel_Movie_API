@@ -1,5 +1,6 @@
 import actor from './actor';
 import genre from './genre';
+import producer from './producer';
 
 $(document).ready(function () {
     $('.linkIndex').on('click', (function (e) {
@@ -70,7 +71,11 @@ $(document).ready(function () {
                     case 'genre':
                         genre.show(response)
                         break;
-                        
+
+                    case 'producer':
+                        producer.show(response)
+                        break;
+
                         // case 'genre':
                         // template = `
                         // <title>Genres</title>

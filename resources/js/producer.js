@@ -1,55 +1,67 @@
-import modal4genre from './modals/genreM';
+import modal4producer from './modals/producerM';
 
-const genre = {
+const producer = {
     show(response) {
         let template = `
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Genre Name</th>
+                <th>Producer Name</th>
+                <th>Email</th>
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody id="genreData"></tbody>
+        <tbody id="producerData"></tbody>
     `;
 
-        let title = `<h1> Genres </h1>`
-        let headtitle = `<title> Genres </title>`
-        let createbtn = `<button type="button" class="btn btn-color" data-toggle="modal" data-target="#genreCreateModal"> Add New Genre </button>`
+        let title = `<h1> Producers </h1>`
+        let headtitle = `<title> Producers </title>`
+        let createbtn = `<button type="button" class="btn btn-color" data-toggle="modal" data-target="#producerCreateModal"> Add New Producer </button>`
 
         $('#headtitle').html(headtitle);
         $('#title').html(title);
         $('#createbtn').html(createbtn);
         $('#tableContent').html(template);
-        $('#content').append(modal4genre);
+        $('#content').append(modal4producer);
 
         //View
-        response.forEach(genre => {
-            $('#genreData').append(`
+        response.forEach(producer => {
+            $('#producerData').append(`
                 <tr>
-                    <td>${genre.id}</td>
-                    <td>${genre.name}</td>
+                    <td>${producer.id}</td>
+                    <td>${producer.name}</td>
+                    <td>${producer.email}</td>
                     <td>
-                        <i class="fas fa-edit genreEditIcon" data-toggle="modal" 
-                            data-target="#genreEditModal" id="${genre.id}"></i> | 
+                        <i class="fas fa-edit producerEditIcon" data-toggle="modal" 
+                            data-target="#producerEditModal" id="${producer.id}"></i> | 
                         
-                        <i class="fas fa-trash-alt genreDeleteIcon" id="${genre.id}"></i>
+                        <i class="fas fa-trash-alt producerDeleteIcon" id="${producer.id}"></i>
                     </td>
                 </tr>
             `)
         });
 
-        var valcreate = $('#genreCreateForm').validate({
+        var valcreate = $('#producerCreateForm').validate({
             rules: {
                 name: {
                     required: true,
                     maxlength: 45
+                },
+                email: {
+                    required: true,
+                    maxlength: 60,
+                    email: true,
                 },
             },
             messages: {
                 name: {
                     required: "Genre Name is required!",
                     maxlength: "Only 45 characters"
+                },
+                email: {
+                    required: "Email is required!",
+                    maxlength: "Only 60 characters",
+                    email: "Must be an email!",
                 },
             },
             errorPlacment: function (error, element) {
@@ -59,38 +71,39 @@ const genre = {
 
         valcreate.form();
         //Create
-        $("#genreCreateSave").on('click', function (e) {
+        $("#producerCreateSave").on('click', function (e) {
             if (valcreate.form()) {
                 e.preventDefault();
             }
-            var genre = $("#genreCreateForm").serialize();
+            var producer = $("#producerCreateForm").serialize();
             $.ajax({
                 type: "POST",
-                url: "/api/genre",
-                data: genre,
+                url: "/api/producer",
+                data: producer,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 dataType: "json",
-                success: function (genre) {
-                    // console.log(genre);
+                success: function (producer) {
+                    // console.log(producer);
                     $('#genreCreateForm :input').each(function () {
                         let input = $(this)
                         input.val('')
                     });
 
-                    $('#genreCreateModal').hide();
-                    $('#genreData').append(`
+                    $('#producerCreateModal').hide();
+                    $('#producerData').append(`
                         <tr>
-                            <td>${genre.id}</td>
-                            <td>${genre.name}</td>
+                            <td>${producer.id}</td>
+                            <td>${producer.name}</td>
+                            <td>${producer.email}</td>
                             <td>
-                                <a><i class="fas fa-edit genreEditIcon" 
-                                    data-toggle="modal" data-target="#genreEditModal"
-                                    id="${genre.id}"></a></i> | 
+                                <a><i class="fas fa-edit producerEditIcon" 
+                                    data-toggle="modal" data-target="#producerEditModal"
+                                    id="${producer.id}"></a></i> | 
 
-                                <i class="fas fa-trash-alt genreDeleteIcon" 
-                                    id="${genre.id}"></i>
+                                <i class="fas fa-trash-alt producerDeleteIcon" 
+                                    id="${producer.id}"></i>
                             </td>
                         </tr>
                     `);
@@ -102,18 +115,19 @@ const genre = {
         });
 
         //Edit
-        $('.genreEditIcon').on('click', function (e) {
+        $('.producerEditIcon').on('click', function (e) {
             var id = $(e.currentTarget).attr('id');
             // console.log(id);
             $.ajax({
                 type: 'GET',
-                url: '/api/genre/' + id + '/edit',
+                url: '/api/producer/' + id + '/edit',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function (genre) {
-                    $('#id').val(genre.id);
-                    $('.genreName').val(genre.name);
+                success: function (producer) {
+                    $('#id').val(producer.id);
+                    $('.producerName').val(producer.name);
+                    $('.producerEmail').val(producer.email);
                 },
                 // error: function (response) {
                 //     console.log(response);
@@ -121,7 +135,7 @@ const genre = {
             });
         });
 
-        var valedit = $('#genreEditForm').validate({
+        var valedit = $('#producerEditForm').validate({
             rules: {
                 name: {
                     required: true,
@@ -130,7 +144,7 @@ const genre = {
             },
             messages: {
                 name: {
-                    required: "Genre Name is required!",
+                    required: "First name is required!",
                     maxlength: "Only 45 characters"
                 },
             },
@@ -141,26 +155,26 @@ const genre = {
 
         valedit.form();
         //Save 
-        $("#genreEditSave").on('click', function (e) {
+        $("#producerEditSave").on('click', function (e) {
             if (valedit.form()) {
                 e.preventDefault();
             }
             var id = $("#id").val();
-            var genredata = $("#genreEditForm").serialize();
+            var producerdata = $("#producerEditForm").serialize();
             $.ajax({
                 type: "PUT",
-                url: "/api/genre/" + id,
-                data: genredata,
+                url: "/api/producer/" + id,
+                data: producerdata,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 dataType: "json",
                 success: function () {
-                    $('#genreEditModal').hide();
+                    $('#producerEditModal').hide();
                     $.ajax({
-                        url: '/api/genre',
+                        url: '/api/producer',
                         success(response) {
-                            genre.show(response);
+                            producer.show(response);
                         }
                     })
                 },
@@ -171,15 +185,15 @@ const genre = {
         });
 
         //Delete
-        $('.genreDeleteIcon').on('click', function (e) {
+        $('.producerDeleteIcon').on('click', function (e) {
             e.preventDefault();
             var id = this.id;
             var $tr = $(this).closest('tr')
             // console.log(id);
-            if (confirm(`Are you sure you want to delete Genre Number ${id}?`)) {
+            if (confirm(`Are you sure you want to delete Producer Number ${id}?`)) {
                 $.ajax({
                     type: "DELETE",
-                    url: "/api/genre/" + id,
+                    url: "/api/producer/" + id,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -198,4 +212,4 @@ const genre = {
     }
 }
 
-export default genre;
+export default producer;
