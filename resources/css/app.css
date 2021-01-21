@@ -1,3 +1,52 @@
+/* html{
+
+} */
 body{
-    background:#312C51;
+    background:#f1f1f1;
+}
+
+/* Header */
+.header{
+    padding: 0px 0px 20px 0px;  
+    font-weight: 900;
+}
+
+.wrapper .header nav{
+    background-color: #fdb827;
+}
+
+.navbar a,li{
+    color: #23120b;
+}
+
+h1{
+    color: #23120b;
+}
+
+.btn.btn-color{
+    background: #21209c;
+    color: #FFFFFF;
+}
+
+.fas.fa-edit{
+    color: #21209c
+}
+
+.fas.fa-trash-alt{
+    color: #FF0000
+}
+
+tr td, tr th{
+    color: #23120b;
+    text-align: center;
+}
+
+.btn.cancel{
+    background: #c1c1c1
+}
+
+.error{
+    color: #FF0000;
+    font-style: italic;
+    font-size: smaller;
 }

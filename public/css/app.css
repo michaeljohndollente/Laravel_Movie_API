@@ -1,7 +1,6 @@
 /* html{
 
 } */
-
 body{
     background:#f1f1f1;
 }
@@ -12,18 +11,29 @@ body{
     font-weight: 900;
 }
 
-.navbar{
+.wrapper .header nav{
     background-color: #fdb827;
 }
 
 .navbar a,li{
     color: #23120b;
 }
-.body h1{
+
+h1{
     color: #23120b;
 }
-.btn.btn-primary{
+
+.btn.btn-color{
     background: #21209c;
+    color: #FFFFFF;
+}
+
+.fas.fa-edit{
+    color: #21209c
+}
+
+.fas.fa-trash-alt{
+    color: #FF0000
 }
 
 tr td, tr th{
@@ -31,6 +41,12 @@ tr td, tr th{
     text-align: center;
 }
 
-.body #con table{ 
-    width: 90%;
+.btn.cancel{
+    background: #c1c1c1
+}
+
+.error{
+    color: #FF0000;
+    font-style: italic;
+    font-size: smaller;
 }
