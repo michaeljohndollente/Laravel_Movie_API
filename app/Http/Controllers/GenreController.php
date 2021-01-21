@@ -13,7 +13,8 @@ class GenreController extends Controller
      */
     public function index()
     {
-        return Genre::all();
+        $actor = Genre::all();
+        return response()->json($actor);
     }
 
     /**
@@ -34,7 +35,8 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $genre = Genre::create($request->all());
+        return response()->json($genre);
     }
 
     /**
@@ -54,9 +56,10 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $genre, $id)
     {
-        //
+        $genre = Genre::find($id);
+        return response()->json($genre);
     }
 
     /**
@@ -68,7 +71,9 @@ class GenreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $genre = Genre::find($id);
+        $genre = $genre->update($request->all());
+        return response()->json($genre);
     }
 
     /**
@@ -77,8 +82,9 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $genre, $id)
     {
-        //
+        $genre = Genre::find($id)->delete();
+        return response()->json($genre);
     }
 }

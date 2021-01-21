@@ -1,6 +1,5 @@
 export default function actorModals() {
     return `
-
         <div class="modal fade" id="actorCreateModal" tabindex="-1" aria-labelledby="actorCreate" aria-hidden="true"
             data-backdrop="false">
             <div class="modal-dialog modal-lg">

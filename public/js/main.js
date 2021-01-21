@@ -79,7 +79,7 @@ var actor = {
         },
         dataType: "json",
         success: function success(actor) {
-          console.log(actor);
+          // console.log(actor);
           $('#actorCreateForm :input').each(function () {
             var input = $(this);
             input.val('');
@@ -94,8 +94,8 @@ var actor = {
     }); //Edit
 
     $('.actorEditIcon').on('click', function (e) {
-      var id = $(e.currentTarget).attr('id');
-      console.log(id);
+      var id = $(e.currentTarget).attr('id'); // console.log(id);
+
       $.ajax({
         type: 'GET',
         url: '/api/actor/' + id + '/edit',
@@ -181,8 +181,7 @@ var actor = {
     $('.actorDeleteIcon').on('click', function (e) {
       e.preventDefault();
       var id = this.id;
-      var $tr = $(this).closest('tr');
-      console.log(id);
+      var $tr = $(this).closest('tr'); // console.log(id);
 
       if (confirm("Are you sure you want to delete Actor Number ".concat(id, "?"))) {
         $.ajax({
@@ -193,7 +192,7 @@ var actor = {
           },
           dataType: "json",
           success: function success(data) {
-            console.log(data);
+            // console.log(data);
             $tr.remove();
           } // error:function(data){
           //     console.log('Error:',data);
@@ -208,6 +207,177 @@ var actor = {
 
 /***/ }),
 
+/***/ "./resources/js/genre.js":
+/*!*******************************!*\
+  !*** ./resources/js/genre.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _modals_genreM__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modals/genreM */ "./resources/js/modals/genreM.js");
+
+var genre = {
+  show: function show(response) {
+    var template = "\n        <thead>\n            <tr>\n                <th>ID</th>\n                <th>Genre Name</th>\n                <th>Actions</th>\n            </tr>\n        </thead>\n        <tbody id=\"genreData\"></tbody>\n    ";
+    var title = "<h1> Genres </h1>";
+    var headtitle = "<title> Genres </title>";
+    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-toggle=\"modal\" data-target=\"#genreCreateModal\"> Add New Genre </button>";
+    $('#headtitle').html(headtitle);
+    $('#title').html(title);
+    $('#createbtn').html(createbtn);
+    $('#tableContent').html(template);
+    $('#content').append(_modals_genreM__WEBPACK_IMPORTED_MODULE_0__.default); //View
+
+    response.forEach(function (genre) {
+      $('#genreData').append("\n                <tr>\n                    <td>".concat(genre.id, "</td>\n                    <td>").concat(genre.name, "</td>\n                    <td>\n                        <i class=\"fas fa-edit genreEditIcon\" data-toggle=\"modal\" \n                            data-target=\"#genreEditModal\" id=\"").concat(genre.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt genreDeleteIcon\" id=\"").concat(genre.id, "\"></i>\n                    </td>\n                </tr>\n            "));
+    });
+    var valcreate = $('#genreCreateForm').validate({
+      rules: {
+        name: {
+          required: true,
+          maxlength: 45
+        }
+      },
+      messages: {
+        name: {
+          required: "First name is required!",
+          maxlength: "Only 45 characters"
+        }
+      },
+      errorPlacment: function errorPlacment(error, element) {
+        error.insertAfter(element);
+      }
+    });
+    valcreate.form(); //Create
+
+    $("#genreCreateSave").on('click', function (e) {
+      if (valcreate.form()) {
+        e.preventDefault();
+      }
+
+      var genre = $("#genreCreateForm").serialize();
+      $.ajax({
+        type: "POST",
+        url: "/api/genre",
+        data: genre,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function success(genre) {
+          // console.log(genre);
+          $('#genreCreateForm :input').each(function () {
+            var input = $(this);
+            input.val('');
+          });
+          $('#genreCreateModal').hide();
+          $('#genreData').append("\n                        <tr>\n                            <td>".concat(genre.id, "</td>\n                            <td>").concat(genre.name, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit genreEditIcon\" \n                                    data-toggle=\"modal\" data-target=\"#genreEditModal\"\n                                    id=\"").concat(genre.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt genreDeleteIcon\" \n                                    id=\"").concat(genre.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
+        } // error: function (response) {
+        //     console.log(response);
+        // },
+
+      });
+    }); //Edit
+
+    $('.genreEditIcon').on('click', function (e) {
+      var id = $(e.currentTarget).attr('id'); // console.log(id);
+
+      $.ajax({
+        type: 'GET',
+        url: '/api/genre/' + id + '/edit',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function success(genre) {
+          $('#id').val(genre.id);
+          $('.genreName').val(genre.name);
+        } // error: function (response) {
+        //     console.log(response);
+        // },
+
+      });
+    });
+    var valedit = $('#genreEditForm').validate({
+      rules: {
+        name: {
+          required: true,
+          maxlength: 45
+        }
+      },
+      messages: {
+        name: {
+          required: "First name is required!",
+          maxlength: "Only 45 characters"
+        }
+      },
+      errorPlacment: function errorPlacment(error, element) {
+        error.insertAfter(element);
+      }
+    });
+    valedit.form(); //Save 
+
+    $("#genreEditSave").on('click', function (e) {
+      if (valedit.form()) {
+        e.preventDefault();
+      }
+
+      var id = $("#id").val();
+      var genredata = $("#genreEditForm").serialize();
+      $.ajax({
+        type: "PUT",
+        url: "/api/genre/" + id,
+        data: genredata,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function success() {
+          $('#genreEditModal').hide();
+          $.ajax({
+            url: '/api/genre',
+            success: function success(response) {
+              genre.show(response);
+            }
+          });
+        } // error: function (error) {
+        //     console.log(error);
+        // }
+
+      });
+    }); //Delete
+
+    $('.genreDeleteIcon').on('click', function (e) {
+      e.preventDefault();
+      var id = this.id;
+      var $tr = $(this).closest('tr'); // console.log(id);
+
+      if (confirm("Are you sure you want to delete Genre Number ".concat(id, "?"))) {
+        $.ajax({
+          type: "DELETE",
+          url: "/api/genre/" + id,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          dataType: "json",
+          success: function success(data) {
+            // console.log(data);
+            $tr.remove();
+          } // error:function(data){
+          //     console.log('Error:',data);
+          // }
+
+        });
+      }
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (genre);
+
+/***/ }),
+
 /***/ "./resources/js/main.js":
 /*!******************************!*\
   !*** ./resources/js/main.js ***!
@@ -216,6 +386,8 @@ var actor = {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actor */ "./resources/js/actor.js");
+/* harmony import */ var _genre__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./genre */ "./resources/js/genre.js");
+
 
 $(document).ready(function () {
   $('.linkIndex').on('click', function (e) {
@@ -280,6 +452,10 @@ $(document).ready(function () {
           //     break;
           case 'actor':
             _actor__WEBPACK_IMPORTED_MODULE_0__.default.show(response);
+            break;
+
+          case 'genre':
+            _genre__WEBPACK_IMPORTED_MODULE_1__.default.show(response);
             break;
           // case 'genre':
           // template = `
@@ -455,47 +631,6 @@ $(document).ready(function () {
 //         </div>
 //     </div>
 //     `,
-//     actor:`
-//     <div class="modal fade bd-modal-lg" id="actorCreate" tabindex="-1" aria-labelledby="actorCreate" aria-hidden="true">
-//         <div class="modal-dialog modal-lg">
-//             <div class="modal-content">
-//                 <div class="modal-header">
-//                     <h2>Create New Actor</h2>
-//                     <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
-//                 </div>
-//                 <div class="modal-body">
-//                     <form id="createActorForm" method="post" action="{{ route('actor.store') }}">
-//                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-//                         <label for="imgpath" class="control-label">Upload Image</label>
-//                         <div class="input-group mb-3">
-//                             <div class="custom-file">
-//                                 <input type="file" class="custom-file-input" id="imgpath" name="imgpath" value="">
-//                                 <label class="custom-file-label" for="imgpath">Choose file</label>
-//                             </div>
-//                         </div>
-//                         <div class="form-group">
-//                             <label for="fname" class="control-label">First Name</label>
-//                             <input type="text" class="form-control" id="fname" name="fname">
-//                         </div>
-//                         <div class="form-group">
-//                             <label for="lname" class="control-label">Last name</label>
-//                             <input type="text" class="form-control " id="lname" name="lname">
-//                         </div>
-//                         <div class="form-group">
-//                             <label for="note">Note</label>
-//                             <textarea class="form-control" id="note" name="note" rows="3"></textarea>
-//                         </div>
-//                         <div class="modal-footer">
-//                             <button type="button" class="btn btn-default" data-dismiss="modal"
-//                                 aria-label="Close">Close</button>
-//                             <button type="submit" id="movieSubmit" class="btn btn-primary"
-//                                 data-bs-dismiss="modal">Save</button>
-//                         </div>
-//                     </form>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>`,
 //     genre:`
 //     <div class="modal fade bd-modal-lg" id="genreCreate" tabindex="-1" aria-labelledby="genreCreate" aria-hidden="true">
 //         <div class="modal-dialog modal-lg">
@@ -568,7 +703,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => /* binding */ actorModals
 /* harmony export */ });
 function actorModals() {
-  return "\n\n        <div class=\"modal fade\" id=\"actorCreateModal\" tabindex=\"-1\" aria-labelledby=\"actorCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Actor</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"actorCreateForm\" id=\"actorCreateForm\">\n                            <div class=\"form-group\">\n                                <label for=\"fname\" class=\"control-label\">First Name</label>\n                                <input type=\"text\" class=\"form-control\" id=\"fname\" name=\"fname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Last name</label>\n                                <input type=\"text\" class=\"form-control \" id=\"lname\" name=\"lname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"note\">Note</label>\n                                <textarea class=\"form-control\" id=\"note\" name=\"note\" rows=\"3\"></textarea>\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"actorCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"data-cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"actorEditModal\" tabindex=\"-1\" aria-labelledby=\"actorEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Actor</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"actorEditForm\" id=\"actorEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"fname\" class=\"control-label\">First Name</label>\n                                <input type=\"text\" class=\"form-control actorFirstName\" id=\"fname\" name=\"fname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Last name</label>\n                                <input type=\"text\" class=\"form-control actorLastName\" id=\"lname\" name=\"lname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"note\">Note</label>\n                                <textarea class=\"form-control actorNote\" id=\"note\" name=\"note\" rows=\"3\"></textarea>\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn actorEditSave btn-color\" \n                                    id=\"actorEditSave\">Save</button>\n                                    \n                                <button type=\"button\" class=\"btn cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        ";
+  return "\n        <div class=\"modal fade\" id=\"actorCreateModal\" tabindex=\"-1\" aria-labelledby=\"actorCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Actor</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"actorCreateForm\" id=\"actorCreateForm\">\n                            <div class=\"form-group\">\n                                <label for=\"fname\" class=\"control-label\">First Name</label>\n                                <input type=\"text\" class=\"form-control\" id=\"fname\" name=\"fname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Last name</label>\n                                <input type=\"text\" class=\"form-control \" id=\"lname\" name=\"lname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"note\">Note</label>\n                                <textarea class=\"form-control\" id=\"note\" name=\"note\" rows=\"3\"></textarea>\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"actorCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"data-cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"actorEditModal\" tabindex=\"-1\" aria-labelledby=\"actorEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Actor</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"actorEditForm\" id=\"actorEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"fname\" class=\"control-label\">First Name</label>\n                                <input type=\"text\" class=\"form-control actorFirstName\" id=\"fname\" name=\"fname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Last name</label>\n                                <input type=\"text\" class=\"form-control actorLastName\" id=\"lname\" name=\"lname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"note\">Note</label>\n                                <textarea class=\"form-control actorNote\" id=\"note\" name=\"note\" rows=\"3\"></textarea>\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn actorEditSave btn-color\" \n                                    id=\"actorEditSave\">Save</button>\n                                    \n                                <button type=\"button\" class=\"btn cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        ";
+}
+
+/***/ }),
+
+/***/ "./resources/js/modals/genreM.js":
+/*!***************************************!*\
+  !*** ./resources/js/modals/genreM.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ genreModals
+/* harmony export */ });
+function genreModals() {
+  return "\n    \n    <div class=\"modal fade\" id=\"genreCreateModal\" tabindex=\"-1\" aria-labelledby=\"genreCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Genre</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"genreCreateForm\" id=\"genreCreateForm\">\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Genre Description</label>\n                                <input type=\"text\" class=\"form-control \" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"genreCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"data-cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"genreEditModal\" tabindex=\"-1\" aria-labelledby=\"genreEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Genre</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"genreEditForm\" id=\"genreEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Genre Description</label>\n                                <input type=\"text\" class=\"form-control genreName\" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn genreEditSave btn-color\" \n                                    id=\"genreEditSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n    \n    ";
 }
 
 /***/ })

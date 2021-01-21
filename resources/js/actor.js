@@ -93,7 +93,7 @@ const actor = {
                 },
                 dataType: "json",
                 success: function (actor) {
-                    console.log(actor);
+                    // console.log(actor);
                     $('#actorCreateForm :input').each(function () {
                         let input = $(this)
                         input.val('')
@@ -127,7 +127,7 @@ const actor = {
         //Edit
         $('.actorEditIcon').on('click', function (e) {
             var id = $(e.currentTarget).attr('id');
-            console.log(id);
+            // console.log(id);
             $.ajax({
                 type: 'GET',
                 url: '/api/actor/' + id + '/edit',
@@ -216,7 +216,7 @@ const actor = {
             e.preventDefault();
             var id = this.id;
             var $tr = $(this).closest('tr')
-            console.log(id);
+            // console.log(id);
             if (confirm(`Are you sure you want to delete Actor Number ${id}?`)) {
                 $.ajax({
                     type: "DELETE",
@@ -226,7 +226,7 @@ const actor = {
                     },
                     dataType: "json",
                     success: function (data) {
-                        console.log(data);
+                        // console.log(data);
                         $tr.remove();
                     },
                     // error:function(data){

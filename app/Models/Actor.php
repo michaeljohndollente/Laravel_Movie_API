@@ -11,7 +11,6 @@ class Actor extends Model
     protected $fillable = ['fname', 'lname', 'note'];
     protected $primaryKey = 'id';
     public $timestamps = false;
-
     public function role()
     {
         return $this->hasMany(Role::class);
