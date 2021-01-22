@@ -388,6 +388,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actor */ "./resources/js/actor.js");
 /* harmony import */ var _genre__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./genre */ "./resources/js/genre.js");
 /* harmony import */ var _producer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./producer */ "./resources/js/producer.js");
+/* harmony import */ var _movie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./movie */ "./resources/js/movie.js");
+
 
 
 
@@ -402,58 +404,12 @@ $(document).ready(function () {
       },
       success: function success(response) {
         switch (linkIndex) {
-          // case 'movie':
-          //     template = ` 
-          //     <title>Movies</title>
-          //     <h1>Movies</h1>
-          //     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#movieCreate">Add Movie</button><br><br>
-          //     <table class="table table-hover mx-auto">
-          //         <thead>
-          //             <tr>
-          //                 <th>ID</th>
-          //                 <th>Image</th>
-          //                 <th>Title</th>
-          //                 <th>Description</th>
-          //                 <th>Release</th>
-          //                 <th>Genre</th>
-          //                 <th>Producer</th>
-          //                 <th>Action</th>
-          //             </tr>
-          //         </thead>
-          //         <tbody id="movieData">
-          //         </tbody>
-          //     </table>
-          //     `;
-          //     $('#con').html(template);
-          //     response.forEach(movie => {
-          //         $('#movieData').append(`
-          //         <tr>
-          //             <td>${movie.id}</td>
-          //             <td>${movie.imgpath}</td>
-          //             <td>${movie.title}</td>
-          //             <td>${movie.description}</td>
-          //             <td>${movie.release}</td>
-          //             <td>${movie.genre['name']}</td>
-          //             <td>${movie.producer['name']}</td>
-          //             <td></td>
-          //         </tr>
-          //         `)
-          //     });
-          //     $('#con').append(modals.movie);
-          //     response.forEach(genre =>{
-          //         $('#GenreIDName').append(`
-          //             <option value="${genre['id']}">${genre['name']}</option>
-          //         `)
-          //     });
-          //     $('#con').append(modals.movie);
-          //     response.forEach(producer =>{
-          //         $('#ProducerIDName').append(`
-          //             <option value="${producer['id']}">${producer['name']}</option>
-          //         `)
-          //     });
-          //     break;
           case 'actor':
             _actor__WEBPACK_IMPORTED_MODULE_0__.default.show(response);
+            break;
+
+          case 'movie':
+            _movie__WEBPACK_IMPORTED_MODULE_3__.default.show(response);
             break;
 
           case 'genre':
@@ -463,66 +419,6 @@ $(document).ready(function () {
           case 'producer':
             _producer__WEBPACK_IMPORTED_MODULE_2__.default.show(response);
             break;
-          // case 'genre':
-          // template = `
-          // <title>Genres</title>
-          // <h1>Genres</h1>
-          // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#genreCreate">Add Genre</button><br><br>
-          // <table class="table table-hover mx-auto">
-          //     <thead>
-          //         <tr>
-          //             <th>ID</th>
-          //             <th>Description</th>
-          //             <th>Action</th>
-          //         </tr>
-          //     </thead>
-          //     <tbody id="genreData">
-          //     </tbody>
-          // </table>
-          // `;
-          // $('#con').html(template);
-          // response.forEach(genre => {
-          //     $('#genreData').append(`
-          //     <tr>
-          //         <td>${genre.id}</td>
-          //         <td>${genre.name}</td>
-          //         <td></td>
-          //     </tr>
-          //     `)
-          // });
-          // $('#con').append(modals.genre);
-          // break;
-          // case 'producer':
-          // template = `
-          // <title>Producers</title>
-          // <h1>Producers</h1>
-          // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#producerCreate">Add Producer</button><br><br>
-          // <table class="table table-hover mx-auto">
-          //     <thead>
-          //         <tr>
-          //             <th>ID</th>
-          //             <th>Name</th>
-          //             <th>Email</th>
-          //             <th>Action</th>
-          //         </tr>
-          //     </thead>
-          //     <tbody id="producerData">
-          //     </tbody>
-          // </table>
-          // `;
-          // $('#con').html(template);
-          // response.forEach(producer => {
-          //     $('#producerData').append(`
-          //     <tr>
-          //         <td>${producer.id}</td>
-          //         <td>${producer.name}</td>
-          //         <td>${producer.email}</td>
-          //         <td></td>
-          //     </tr>
-          //     `)
-          // });
-          // $('#con').append(modals.producer);
-          // break;
 
           default:
             break;
@@ -637,64 +533,6 @@ $(document).ready(function () {
 //         </div>
 //     </div>
 //     `,
-//     genre:`
-//     <div class="modal fade bd-modal-lg" id="genreCreate" tabindex="-1" aria-labelledby="genreCreate" aria-hidden="true">
-//         <div class="modal-dialog modal-lg">
-//             <div class="modal-content">
-//                 <div class="modal-header">
-//                     <h2>Create New Genre</h2>
-//                     <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
-//                 </div>
-//                 <div class="modal-body">
-//                     <form id="createGenreForm" method="post" action="{{ route('genre.store') }}">
-//                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-//                         <div class="form-group">
-//                             <label for="name" class="control-label">Name</label>
-//                             <input type="text" class="form-control" id="name" name="name">
-//                         </div>
-//                         <div class="modal-footer">
-//                             <button type="button" class="btn btn-default" data-dismiss="modal"
-//                                 aria-label="Close">Close</button>
-//                             <button type="submit" id="movieSubmit" class="btn btn-primary"
-//                                 data-bs-dismiss="modal">Save</button>
-//                         </div>
-//                     </form>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>`,
-//     producer:`
-//     <div class="modal fade bd-modal-lg" id="producerCreate" tabindex="-1" aria-labelledby="producerCreate"
-//     aria-hidden="true">
-//         <div class="modal-dialog modal-lg">
-//             <div class="modal-content">
-//                 <div class="modal-header">
-//                     <h2>Create New Producer</h2>
-//                     <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
-//                 </div>
-//                 <div class="modal-body">
-//                     <form id="createProducerForm" method="post" action="{{ route('producer.store') }}">
-//                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-//                         <div class="form-group">
-//                             <label for="name" class="control-label">Name</label>
-//                             <input type="text" class="form-control" id="name" name="name">
-//                         </div>
-//                         <div>
-//                             <label for="name" class="control-label">Email</label>
-//                             <input type="text" class="form-control" id="email" name="email">
-//                         </div>
-//                         <div class="modal-footer">
-//                             <button type="button" class="btn btn-default" data-dismiss="modal"
-//                                 aria-label="Close">Close</button>
-//                             <button type="submit" id="movieSubmit" class="btn btn-primary"
-//                                 data-bs-dismiss="modal">Save</button>
-//                         </div>
-//                     </form>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>`,
-// }
 
 /***/ }),
 
@@ -730,6 +568,22 @@ function genreModals() {
 
 /***/ }),
 
+/***/ "./resources/js/modals/movieM.js":
+/*!***************************************!*\
+  !*** ./resources/js/modals/movieM.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ moviesModals
+/* harmony export */ });
+function moviesModals() {
+  return "\n        <div class=\"modal fade\" id=\"movieCreateModal\" tabindex=\"-1\" aria-labelledby=\"movieCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Movie</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"movieCreateForm\" id=\"movieCreateForm\">\n                        <div class=\"form-group\">\n                            <label for=\"title\" class=\"control-label\">Title</label>\n                            <input type=\"text\" class=\"form-control\" id=\"title\" name=\"title\" value=\"\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"description\" class=\"control-label\">Description</label>\n                            <textarea class=\"form-control\" id=\"description\" name=\"description\" rows=\"3\" value=\"\"></textarea>\n                        </div>\n                        <div class=\"md-form form-group md-outline input-with-post-icon datepicker\">\n                            <label for=\"Release\">Release</label>\n                            <input placeholder=\"Select date\" type=\"date\" id=\"release\" class=\"form-control\" name=\"release\" value=\"\"> \n                        </div>\n\n                        <div class=\"row\">\n                            <div class=\"form-group col-md-6\">\n                                <label for=\"genre\">Genre</label>\n                                <select id=\"GenreIDName\" class=\"form-control\" name=\"genre_id\">\n                                </select>\n                            </div>\n\n                            <div class=\"form-group col-md-6\">\n                                <label for=\"producer\">Producer</label>\n                                <select id=\"ProducerIDName\" class=\"form-control\" name=\"producer_id\">\n                                </select>\n                            </div>\n                        </div>\n                        \n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"movieCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"movieDismiss\" data-bs-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"movieEditModal\" tabindex=\"-1\" aria-labelledby=\"movieEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Movie</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"movieEditForm\" id=\"movieEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                            <label for=\"title\" class=\"control-label\">Title</label>\n                            <input type=\"text\" class=\"form-control movieTitle\" id=\"title\" name=\"title\" value=\"\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"description\" class=\"control-label\">Description</label>\n                            <textarea class=\"form-control movieDescription\" id=\"description\" name=\"description\" rows=\"3\" value=\"\"></textarea>\n                        </div>\n                        <div class=\"md-form form-group md-outline input-with-post-icon datepicker\">\n                            <label for=\"Release\">Release</label>\n                            <input placeholder=\"Select date\" type=\"date\" id=\"release\" class=\"form-control movieRelease\" name=\"release\" value=\"\"> \n                        </div>\n\n                        <div class=\"row\">\n                            <div class=\"form-group col-md-6\">\n                                <label for=\"producer\">Producer</label>\n                                <select id=\"ProducerIDName\" class=\"form-control movieProducer\">\n                                </select>\n                            </div>\n\n                            <div class=\"form-group col-md-6\">\n                                <label for=\"genre\">Genre</label>\n                                <select id=\"GenreIDName\" class=\"form-control movieGenre\">\n                                </select>\n                            </div>\n                        </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn movieEditSave btn-color\" \n                                    id=\"movieEditSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" data-bs-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        ";
+}
+
+/***/ }),
+
 /***/ "./resources/js/modals/producerM.js":
 /*!******************************************!*\
   !*** ./resources/js/modals/producerM.js ***!
@@ -743,6 +597,257 @@ __webpack_require__.r(__webpack_exports__);
 function producerModals() {
   return "\n    <div class=\"modal fade\" id=\"producerCreateModal\" tabindex=\"-1\" aria-labelledby=\"producerCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Producer</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"producerCreateForm\" id=\"producerCreateForm\">\n                            <div class=\"form-group\">\n                                <label for=\"name\" class=\"control-label\">Producer Name</label>\n                                <input type=\"text\" class=\"form-control \" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"name\" class=\"control-label\">Email</label>\n                                <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"producerCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"data-cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"producerEditModal\" tabindex=\"-1\" aria-labelledby=\"producerEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Producer</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"producerEditForm\" id=\"producerEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"name\" class=\"control-label\">Producer Name</label>\n                                <input type=\"text\" class=\"form-control producerName\" id=\"name\" name=\"name\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"name\" class=\"control-label\">Email</label>\n                                <input type=\"email\" class=\"form-control producerEmail\" id=\"email\" name=\"email\">\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn producerEditSave btn-color\" \n                                    id=\"producerEditSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n    \n    ";
 }
+
+/***/ }),
+
+/***/ "./resources/js/movie.js":
+/*!*******************************!*\
+  !*** ./resources/js/movie.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _modals_movieM__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modals/movieM */ "./resources/js/modals/movieM.js");
+
+var movie = {
+  show: function show(response) {
+    var template = "\n        <thead>\n            <tr>\n                <th>ID</th>\n                <th>Title</th>\n                <th>Description</th>\n                <th>Release</th>\n                <th>Genre</th>\n                <th>Producer</th>\n                <th>Action</th>\n            </tr>\n        </thead>\n        <tbody id=\"movieData\"></tbody>\n    ";
+    var title = "<h1> Movies </h1>";
+    var headtitle = "<title> Movies </title>";
+    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-bs-toggle=\"modal\" data-bs-target=\"#movieCreateModal\"> Add New Movie </button>";
+    $('#headtitle').html(headtitle);
+    $('#title').html(title);
+    $('#createbtn').html(createbtn);
+    $('#tableContent').html(template);
+    $('#content').append(_modals_movieM__WEBPACK_IMPORTED_MODULE_0__.default); //View
+
+    response.forEach(function (movie) {
+      $('#movieData').append("\n                <tr>\n                    <td>".concat(movie.id, "</td>\n                    <td>").concat(movie.title, "</td>\n                    <td>").concat(movie.description, "</td>\n                    <td>").concat(movie.release, "</td>\n                    <td>").concat(movie.genre.name, "</td>\n                    <td>").concat(movie.producer.name, "</td>\n                    <td>\n                        <i class=\"fas fa-edit movieEditIcon\" data-bs-toggle=\"modal\" \n                            data-bs-target=\"#movieEditModal\" id=\"").concat(movie.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt movieDeleteIcon\" id=\"").concat(movie.id, "\"></i>\n                    </td>\n                </tr>\n            "));
+    });
+    var valcreate = $('#movieCreateForm').validate({
+      rules: {
+        title: {
+          required: true,
+          maxlength: 45
+        },
+        description: {
+          required: true,
+          maxlength: 45
+        },
+        release: {
+          required: true,
+          date: true
+        },
+        genre_id: {
+          required: true
+        },
+        producer_id: {
+          required: true
+        }
+      },
+      messages: {
+        title: {
+          required: "Title is Required!",
+          maxlength: "Only 45 Characters"
+        },
+        description: {
+          required: "Description is Required!",
+          maxlength: "Only 45 Characters"
+        },
+        release: {
+          required: "Date is Required!",
+          date: "Must be Valid Date Format"
+        },
+        genre_id: {
+          required: "Genre is Required!"
+        },
+        producer_id: {
+          required: "Producer is Required!"
+        }
+      },
+      errorPlacment: function errorPlacment(error, element) {
+        error.insertAfter(element);
+      }
+    });
+    valcreate.form();
+    $('#movieCreateModal').on('show.bs.modal', function (e) {
+      $.ajax({
+        type: "GET",
+        url: "/api/producer",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function success(response) {
+          response.forEach(function (producer) {
+            $('#ProducerIDName').append("\n                            <option value=\"".concat(producer['id'], "\">").concat(producer['name'], "</option>\n                        "));
+          });
+        }
+      });
+      $.ajax({
+        type: "GET",
+        url: "/api/genre",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function success(response) {
+          response.forEach(function (genre) {
+            $('#GenreIDName').append("\n                            <option value=\"".concat(genre['id'], "\">").concat(genre['name'], "</option>\n                        "));
+          });
+        }
+      });
+    });
+    $('#movieCreateModal').on('hidden.bs.modal', function (e) {
+      $('#GenreIDName').empty();
+      $('#ProducerIDName').empty();
+    }); //Create
+
+    $("#movieCreateSave").on('click', function (e) {
+      if (valcreate.form()) {
+        e.preventDefault();
+      }
+
+      var movie = $("#movieCreateForm").serialize();
+      console.log(movie);
+      $.ajax({
+        type: "POST",
+        url: "/api/movie",
+        data: movie,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function success(movie) {
+          $('#movieCreateForm :input').each(function () {
+            var input = $(this);
+            input.val('');
+          });
+          $('#movieCreateModal').hide();
+          $('#movieData').append("\n                        <tr>\n                            <td>".concat(movie.id, "</td>\n                            <td>").concat(movie.title, "</td>\n                            <td>").concat(movie.description, "</td>\n                            <td>").concat(movie.release, "</td>\n                            <td>").concat(movie.genre.name, "</td>\n                            <td>").concat(movie.producer.name, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit movieEditIcon\" \n                                    data-bs-toggle=\"modal\" data-bs-target=\"#movieEditModal\"\n                                    id=\"").concat(movie.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt movieDeleteIcon\" \n                                    \n                                    id=\"").concat(movie.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
+        } // error: function (response) {
+        //     console.log(response);
+        // },
+
+      });
+    }); //Edit
+
+    $('.movieEditIcon').on('click', function (e) {
+      var id = $(e.currentTarget).attr('id'); // console.log(id);
+
+      $.ajax({
+        type: 'GET',
+        url: '/api/movie/' + id + '/edit',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function success(movie) {
+          $('#id').val(movie.id);
+          $('.movieTitle').val(movie.title);
+          $('.movieDescription').val(movie.description);
+          $('.movieRelease').val(movie.release);
+          $('.movieProducer').val(movie.producer['name']);
+          $('.actorGenre').val(movie.genre['name']);
+        } // error: function (response) {
+        //     console.log(response);
+        // },
+
+      });
+    });
+    var valedit = $('#movieEditForm').validate({
+      rules: {
+        fname: {
+          required: true,
+          maxlength: 45
+        },
+        lname: {
+          required: true,
+          maxlength: 45
+        },
+        note: {
+          required: true,
+          maxlength: 90
+        }
+      },
+      messages: {
+        fname: {
+          required: "First name is required!",
+          maxlength: "Only 45 characters"
+        },
+        lname: {
+          required: "Last name is required!",
+          maxlength: "Only 45 characters"
+        },
+        note: {
+          required: "Note is required!",
+          maxlength: "Only 90 characters"
+        }
+      },
+      errorPlacment: function errorPlacment(error, element) {
+        error.insertAfter(element);
+      }
+    });
+    valedit.form(); //Save 
+
+    $("#movieEditSave").on('click', function (e) {
+      if (valedit.form()) {
+        e.preventDefault();
+      }
+
+      var id = $("#id").val();
+      var moviedata = $("#movieEditForm").serialize();
+      $.ajax({
+        type: "PUT",
+        url: "/api/movie/" + id,
+        data: moviedata,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function success() {
+          $('#movieEditModal').hide();
+          $.ajax({
+            url: '/api/movie',
+            success: function success(response) {
+              movie.show(response);
+            }
+          });
+        } // error: function (error) {
+        //     console.log(error);
+        // }
+
+      });
+    }); //Delete
+
+    $('.movieDeleteIcon').on('click', function (e) {
+      e.preventDefault();
+      var id = this.id;
+      var $tr = $(this).closest('tr'); // console.log(id);
+
+      if (confirm("Are you sure you want to delete Movie Number ".concat(id, "?"))) {
+        $.ajax({
+          type: "DELETE",
+          url: "/api/movie/" + id,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          dataType: "json",
+          success: function success(data) {
+            // console.log(data);
+            $tr.remove();
+          } // error:function(data){
+          //     console.log('Error:',data);
+          // }
+
+        });
+      }
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (movie);
 
 /***/ }),
 

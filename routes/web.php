@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('templates.main');
 });
+// Route::resource('/', function(){
+//     return view('templates.main')->with(MovieController::class);
+// });
 

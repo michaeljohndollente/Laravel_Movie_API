@@ -9,22 +9,16 @@ class Movie extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'release', 'imgpath'];
-
+    protected $fillable = ['title', 'description', 'release', 'genre_id', 'producer_id'];
+    public $timestamps = false;
     public function producer()
     {
-        return $this->belongsTo(Producer::class);
+        return $this->belongsTo('App\Models\Producer', 'producer_id');
     }
 
     public function genre()
     {
-        return $this->belongsTo(Genre::class);
-    }
-
-    public function rate()
-    {
-        // return $this->hasMany(Rate::class);
-        return $this->hasMany('App\Model\Rate','movie_id');
+        return $this->belongsTo('App\Models\Genre', 'genre_id');
     }
 }
 
