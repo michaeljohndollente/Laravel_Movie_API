@@ -15,7 +15,7 @@ const genre = {
 
         let title = `<h1> Genres </h1>`
         let headtitle = `<title> Genres </title>`
-        let createbtn = `<button type="button" class="btn btn-color" data-toggle="modal" data-target="#genreCreateModal"> Add New Genre </button>`
+        let createbtn = `<button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#genreCreateModal"> Add New Genre </button>`
 
         $('#headtitle').html(headtitle);
         $('#title').html(title);
@@ -30,8 +30,8 @@ const genre = {
                     <td>${genre.id}</td>
                     <td>${genre.name}</td>
                     <td>
-                        <i class="fas fa-edit genreEditIcon" data-toggle="modal" 
-                            data-target="#genreEditModal" id="${genre.id}"></i> | 
+                        <i class="fas fa-edit genreEditIcon" data-bs-toggle="modal" 
+                            data-bs-target="#genreEditModal" id="${genre.id}"></i> | 
                         
                         <i class="fas fa-trash-alt genreDeleteIcon" id="${genre.id}"></i>
                     </td>
@@ -69,7 +69,7 @@ const genre = {
                 url: "/api/genre",
                 data: genre,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function (genre) {
@@ -86,7 +86,7 @@ const genre = {
                             <td>${genre.name}</td>
                             <td>
                                 <a><i class="fas fa-edit genreEditIcon" 
-                                    data-toggle="modal" data-target="#genreEditModal"
+                                    data-bs-toggle="modal" data-bs-target="#genreEditModal"
                                     id="${genre.id}"></a></i> | 
 
                                 <i class="fas fa-trash-alt genreDeleteIcon" 
@@ -109,7 +109,7 @@ const genre = {
                 type: 'GET',
                 url: '/api/genre/' + id + '/edit',
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 success: function (genre) {
                     $('#id').val(genre.id);
@@ -152,7 +152,7 @@ const genre = {
                 url: "/api/genre/" + id,
                 data: genredata,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function () {
@@ -181,7 +181,7 @@ const genre = {
                     type: "DELETE",
                     url: "/api/genre/" + id,
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     },
                     dataType: "json",
                     success: function (data) {

@@ -17,7 +17,7 @@ const actor = {
 
         let title = `<h1> Actors </h1>`
         let headtitle = `<title> Actors </title>`
-        let createbtn = `<button type="button" class="btn btn-color" data-toggle="modal" data-target="#actorCreateModal"> Add New Actor </button>`
+        let createbtn = `<button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#actorCreateModal"> Add New Actor </button>`
 
         $('#headtitle').html(headtitle);
         $('#title').html(title);
@@ -34,8 +34,8 @@ const actor = {
                     <td>${actor.lname}</td>
                     <td>${actor.note}</td>
                     <td>
-                        <i class="fas fa-edit actorEditIcon" data-toggle="modal" 
-                            data-target="#actorEditModal" id="${actor.id}"></i> | 
+                        <i class="fas fa-edit actorEditIcon" data-bs-toggle="modal" 
+                            data-bs-target="#actorEditModal" id="${actor.id}"></i> | 
                         
                         <i class="fas fa-trash-alt actorDeleteIcon" id="${actor.id}"></i>
                     </td>
@@ -89,7 +89,7 @@ const actor = {
                 url: "/api/actor",
                 data: actor,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function (actor) {
@@ -108,7 +108,7 @@ const actor = {
                             <td>${actor.note}</td>
                             <td>
                                 <a><i class="fas fa-edit actorEditIcon" 
-                                    data-toggle="modal" data-target="#actorEditModal"
+                                    data-bs-toggle="modal" data-bs-target="#actorEditModal"
                                     id="${actor.id}"></a></i> | 
 
                                 <i class="fas fa-trash-alt actorDeleteIcon" 
@@ -132,7 +132,7 @@ const actor = {
                 type: 'GET',
                 url: '/api/actor/' + id + '/edit',
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 success: function (actor) {
                     $('#id').val(actor.id);
@@ -193,7 +193,7 @@ const actor = {
                 url: "/api/actor/" + id,
                 data: actordata,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function () {
@@ -222,7 +222,7 @@ const actor = {
                     type: "DELETE",
                     url: "/api/actor/" + id,
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     },
                     dataType: "json",
                     success: function (data) {

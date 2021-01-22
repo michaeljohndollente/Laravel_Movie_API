@@ -16,7 +16,7 @@ const producer = {
 
         let title = `<h1> Producers </h1>`
         let headtitle = `<title> Producers </title>`
-        let createbtn = `<button type="button" class="btn btn-color" data-toggle="modal" data-target="#producerCreateModal"> Add New Producer </button>`
+        let createbtn = `<button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#producerCreateModal"> Add New Producer </button>`
 
         $('#headtitle').html(headtitle);
         $('#title').html(title);
@@ -32,8 +32,8 @@ const producer = {
                     <td>${producer.name}</td>
                     <td>${producer.email}</td>
                     <td>
-                        <i class="fas fa-edit producerEditIcon" data-toggle="modal" 
-                            data-target="#producerEditModal" id="${producer.id}"></i> | 
+                        <i class="fas fa-edit producerEditIcon" data-bs-toggle="modal" 
+                            data-bs-target="#producerEditModal" id="${producer.id}"></i> | 
                         
                         <i class="fas fa-trash-alt producerDeleteIcon" id="${producer.id}"></i>
                     </td>
@@ -81,7 +81,7 @@ const producer = {
                 url: "/api/producer",
                 data: producer,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function (producer) {
@@ -99,7 +99,7 @@ const producer = {
                             <td>${producer.email}</td>
                             <td>
                                 <a><i class="fas fa-edit producerEditIcon" 
-                                    data-toggle="modal" data-target="#producerEditModal"
+                                    data-bs-toggle="modal" data-bs-target="#producerEditModal"
                                     id="${producer.id}"></a></i> | 
 
                                 <i class="fas fa-trash-alt producerDeleteIcon" 
@@ -122,7 +122,7 @@ const producer = {
                 type: 'GET',
                 url: '/api/producer/' + id + '/edit',
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 success: function (producer) {
                     $('#id').val(producer.id);
@@ -166,7 +166,7 @@ const producer = {
                 url: "/api/producer/" + id,
                 data: producerdata,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function () {
@@ -195,7 +195,7 @@ const producer = {
                     type: "DELETE",
                     url: "/api/producer/" + id,
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     },
                     dataType: "json",
                     success: function (data) {

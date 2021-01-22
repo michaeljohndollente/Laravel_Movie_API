@@ -101,7 +101,7 @@ const movie = {
                 type: "GET",
                 url: "/api/producer",
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function (response) {
@@ -116,7 +116,7 @@ const movie = {
                 type: "GET",
                 url: "/api/genre",
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function (response) {
@@ -146,7 +146,7 @@ const movie = {
                 url: "/api/movie",
                 data: movie,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function (movie) {
@@ -189,7 +189,7 @@ const movie = {
                 type: 'GET',
                 url: '/api/movie/' + id + '/edit',
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 success: function (movie) {
                     $('#id').val(movie.id);
@@ -252,7 +252,7 @@ const movie = {
                 url: "/api/movie/" + id,
                 data: moviedata,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 },
                 dataType: "json",
                 success: function () {
@@ -283,7 +283,7 @@ const movie = {
                     type: "DELETE",
                     url: "/api/movie/" + id,
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     },
                     dataType: "json",
                     success: function (data) {

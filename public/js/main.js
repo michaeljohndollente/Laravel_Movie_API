@@ -19,7 +19,7 @@ var actor = {
     var template = "\n        <thead>\n            <tr>\n                <th>ID</th>\n                <th>First Name</th>\n                <th>Last Name</th>\n                <th>Notes</th>\n                <th>Actions</th>\n            </tr>\n        </thead>\n        <tbody id=\"actorData\"></tbody>\n    ";
     var title = "<h1> Actors </h1>";
     var headtitle = "<title> Actors </title>";
-    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-toggle=\"modal\" data-target=\"#actorCreateModal\"> Add New Actor </button>";
+    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-bs-toggle=\"modal\" data-bs-target=\"#actorCreateModal\"> Add New Actor </button>";
     $('#headtitle').html(headtitle);
     $('#title').html(title);
     $('#createbtn').html(createbtn);
@@ -27,7 +27,7 @@ var actor = {
     $('#content').append(_modals_actorM__WEBPACK_IMPORTED_MODULE_0__.default); //View
 
     response.forEach(function (actor) {
-      $('#actorData').append("\n                <tr>\n                    <td>".concat(actor.id, "</td>\n                    <td>").concat(actor.fname, "</td>\n                    <td>").concat(actor.lname, "</td>\n                    <td>").concat(actor.note, "</td>\n                    <td>\n                        <i class=\"fas fa-edit actorEditIcon\" data-toggle=\"modal\" \n                            data-target=\"#actorEditModal\" id=\"").concat(actor.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt actorDeleteIcon\" id=\"").concat(actor.id, "\"></i>\n                    </td>\n                </tr>\n            "));
+      $('#actorData').append("\n                <tr>\n                    <td>".concat(actor.id, "</td>\n                    <td>").concat(actor.fname, "</td>\n                    <td>").concat(actor.lname, "</td>\n                    <td>").concat(actor.note, "</td>\n                    <td>\n                        <i class=\"fas fa-edit actorEditIcon\" data-bs-toggle=\"modal\" \n                            data-bs-target=\"#actorEditModal\" id=\"").concat(actor.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt actorDeleteIcon\" id=\"").concat(actor.id, "\"></i>\n                    </td>\n                </tr>\n            "));
     });
     var valcreate = $('#actorCreateForm').validate({
       rules: {
@@ -75,7 +75,7 @@ var actor = {
         url: "/api/actor",
         data: actor,
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success(actor) {
@@ -85,7 +85,7 @@ var actor = {
             input.val('');
           });
           $('#actorCreateModal').hide();
-          $('#actorData').append("\n                        <tr>\n                            <td>".concat(actor.id, "</td>\n                            <td>").concat(actor.fname, "</td>\n                            <td>").concat(actor.lname, "</td>\n                            <td>").concat(actor.note, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit actorEditIcon\" \n                                    data-toggle=\"modal\" data-target=\"#actorEditModal\"\n                                    id=\"").concat(actor.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt actorDeleteIcon\" \n                                    \n                                    id=\"").concat(actor.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
+          $('#actorData').append("\n                        <tr>\n                            <td>".concat(actor.id, "</td>\n                            <td>").concat(actor.fname, "</td>\n                            <td>").concat(actor.lname, "</td>\n                            <td>").concat(actor.note, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit actorEditIcon\" \n                                    data-bs-toggle=\"modal\" data-bs-target=\"#actorEditModal\"\n                                    id=\"").concat(actor.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt actorDeleteIcon\" \n                                    \n                                    id=\"").concat(actor.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
         } // error: function (response) {
         //     console.log(response);
         // },
@@ -100,7 +100,7 @@ var actor = {
         type: 'GET',
         url: '/api/actor/' + id + '/edit',
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         success: function success(actor) {
           $('#id').val(actor.id);
@@ -160,7 +160,7 @@ var actor = {
         url: "/api/actor/" + id,
         data: actordata,
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success() {
@@ -188,7 +188,7 @@ var actor = {
           type: "DELETE",
           url: "/api/actor/" + id,
           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'Authorization': 'Bearer ' + localStorage.getItem('access_token')
           },
           dataType: "json",
           success: function success(data) {
@@ -224,7 +224,7 @@ var genre = {
     var template = "\n        <thead>\n            <tr>\n                <th>ID</th>\n                <th>Genre Name</th>\n                <th>Actions</th>\n            </tr>\n        </thead>\n        <tbody id=\"genreData\"></tbody>\n    ";
     var title = "<h1> Genres </h1>";
     var headtitle = "<title> Genres </title>";
-    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-toggle=\"modal\" data-target=\"#genreCreateModal\"> Add New Genre </button>";
+    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-bs-toggle=\"modal\" data-bs-target=\"#genreCreateModal\"> Add New Genre </button>";
     $('#headtitle').html(headtitle);
     $('#title').html(title);
     $('#createbtn').html(createbtn);
@@ -232,7 +232,7 @@ var genre = {
     $('#content').append(_modals_genreM__WEBPACK_IMPORTED_MODULE_0__.default); //View
 
     response.forEach(function (genre) {
-      $('#genreData').append("\n                <tr>\n                    <td>".concat(genre.id, "</td>\n                    <td>").concat(genre.name, "</td>\n                    <td>\n                        <i class=\"fas fa-edit genreEditIcon\" data-toggle=\"modal\" \n                            data-target=\"#genreEditModal\" id=\"").concat(genre.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt genreDeleteIcon\" id=\"").concat(genre.id, "\"></i>\n                    </td>\n                </tr>\n            "));
+      $('#genreData').append("\n                <tr>\n                    <td>".concat(genre.id, "</td>\n                    <td>").concat(genre.name, "</td>\n                    <td>\n                        <i class=\"fas fa-edit genreEditIcon\" data-bs-toggle=\"modal\" \n                            data-bs-target=\"#genreEditModal\" id=\"").concat(genre.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt genreDeleteIcon\" id=\"").concat(genre.id, "\"></i>\n                    </td>\n                </tr>\n            "));
     });
     var valcreate = $('#genreCreateForm').validate({
       rules: {
@@ -264,7 +264,7 @@ var genre = {
         url: "/api/genre",
         data: genre,
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success(genre) {
@@ -274,7 +274,7 @@ var genre = {
             input.val('');
           });
           $('#genreCreateModal').hide();
-          $('#genreData').append("\n                        <tr>\n                            <td>".concat(genre.id, "</td>\n                            <td>").concat(genre.name, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit genreEditIcon\" \n                                    data-toggle=\"modal\" data-target=\"#genreEditModal\"\n                                    id=\"").concat(genre.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt genreDeleteIcon\" \n                                    id=\"").concat(genre.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
+          $('#genreData').append("\n                        <tr>\n                            <td>".concat(genre.id, "</td>\n                            <td>").concat(genre.name, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit genreEditIcon\" \n                                    data-bs-toggle=\"modal\" data-bs-target=\"#genreEditModal\"\n                                    id=\"").concat(genre.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt genreDeleteIcon\" \n                                    id=\"").concat(genre.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
         } // error: function (response) {
         //     console.log(response);
         // },
@@ -289,7 +289,7 @@ var genre = {
         type: 'GET',
         url: '/api/genre/' + id + '/edit',
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         success: function success(genre) {
           $('#id').val(genre.id);
@@ -331,7 +331,7 @@ var genre = {
         url: "/api/genre/" + id,
         data: genredata,
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success() {
@@ -359,7 +359,7 @@ var genre = {
           type: "DELETE",
           url: "/api/genre/" + id,
           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'Authorization': 'Bearer ' + localStorage.getItem('access_token')
           },
           dataType: "json",
           success: function success(data) {
@@ -389,6 +389,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _genre__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./genre */ "./resources/js/genre.js");
 /* harmony import */ var _producer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./producer */ "./resources/js/producer.js");
 /* harmony import */ var _movie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./movie */ "./resources/js/movie.js");
+/* harmony import */ var _modals_authM__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modals/authM */ "./resources/js/modals/authM.js");
+
 
 
 
@@ -399,6 +401,9 @@ $(document).ready(function () {
     $.ajax({
       type: "GET",
       url: "/api/" + linkIndex,
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      },
       error: function error(response) {
         console.log(response);
       },
@@ -427,112 +432,52 @@ $(document).ready(function () {
     });
   });
   $(".draggable").draggable();
-}); // const modals = {
-//     movie:`
-//     <div class="modal fade bd-modal-lg" id="movieCreate" tabindex="-1" aria-labelledby="movieCreate" aria-hidden="true">
-//       <div class="modal-dialog modal-lg">
-//         <div class="modal-content">
-//             <div class="modal-header">
-//                 <h2>Create New Movie</h2>
-//                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
-//             </div>
-//             <div class="modal-body">
-//                 <form id="createMovieForm" method="post" action="{{route('movie.store')}}">
-//                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-//                     <div class="form-group">
-//                             <label for="imgpath" class="control-label">Upload Image</label>
-//                                 <div class="custom-file">
-//                                     <input type="file" class="custom-file-input" id="imgpath" name="imgpath" value="">
-//                                     <label class="custom-file-label" for="imgpath">Choose file</label>
-//                                 </div>
-//                         </div>
-//                         <div class="form-group">
-//                             <label for="title" class="control-label">Title</label>
-//                             <input type="text" class="form-control" id="title" name="title" value="">
-//                         </div>
-//                         <div class="form-group">
-//                             <label for="description" class="control-label">Description</label>
-//                             <textarea class="form-control" id="description" name="description" rows="3" value=""></textarea>
-//                         </div>
-//                         <div class="md-form form-group md-outline input-with-post-icon datepicker">
-//                             <label for="Release">Release</label>
-//                             <input placeholder="Select date" type="date" id="release" class="form-control" name="release" value=""> 
-//                         </div>
-//                         <div class="row">
-//                             <div class="form-group col-md-6">
-//                                 <label for="producer">Producer</label>
-//                                 <select id="ProducerIDName" class="form-control">
-//                                 </select>
-//                             </div>
-//                             <div class="form-group col-md-6">
-//                                 <label for="genre">Genre</label>
-//                                 <select id="GenreIDName" class="form-control">
-//                                 </select>
-//                             </div>
-//                         </div>
-//                         <div class="modal-footer">
-//                             <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Close</button>
-//                             <button type="submit" id="movieSubmit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-//                         </div>
-//                     </div>
-//                 </form>                
-//             </div>
-//         </div>
-//       </div>
-//     </div>`
-//     `
-//     <div class="modal fade bd-modal-lg" id="movieEdit" tabindex="-1" aria-labelledby="movieEdit" aria-hidden="true">
-//     <div class="modal-dialog modal-lg">
-//         <div class="modal-content">
-//             <div class="modal-header">
-//                 <h2>Edit Movie</h2>
-//                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
-//             </div>
-//             <div class="modal-body">
-//                 <form id="editMovieForm" method="post" action="{{route('movie.store')}}">
-//                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-//                     <div class="form-group">
-//                             <label for="imgpath" class="control-label">Upload Image</label>
-//                                 <div class="custom-file">
-//                                     <input type="file" class="custom-file-input" id="imgpath" name="imgpath" value="">
-//                                     <label class="custom-file-label" for="imgpath">Choose file</label>
-//                                 </div>
-//                         </div>
-//                         <div class="form-group">
-//                             <label for="title" class="control-label">Title</label>
-//                             <input type="text" class="form-control" id="title" name="title" value="">
-//                         </div>
-//                         <div class="form-group">
-//                             <label for="description" class="control-label">Description</label>
-//                             <textarea class="form-control" id="description" name="description" rows="3" value=""></textarea>
-//                         </div>
-//                         <div class="md-form form-group md-outline input-with-post-icon datepicker">
-//                             <label for="Release">Release</label>
-//                             <input placeholder="Select date" type="date" id="release" class="form-control" name="release" value=""> 
-//                         </div>
-//                         <div class="row">
-//                             <div class="form-group col-md-6">
-//                                 <label for="producer">Producer</label>
-//                                 <select id="ProducerIDName" class="form-control">
-//                                 </select>
-//                             </div>
-//                             <div class="form-group col-md-6">
-//                                 <label for="genre">Genre</label>
-//                                 <select id="GenreIDName" class="form-control">
-//                                 </select>
-//                             </div>
-//                         </div>
-//                         <div class="modal-footer">
-//                             <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Close</button>
-//                             <button type="submit" id="movieSubmit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-//                         </div>
-//                     </div>
-//                 </form>                
-//             </div>
-//         </div>
-//         </div>
-//     </div>
-//     `,
+});
+$('#content').append(_modals_authM__WEBPACK_IMPORTED_MODULE_4__.default);
+$('#registerBtn').on('click', function (e) {
+  var data = $('#registerForm').serialize();
+  $.ajax({
+    type: "POST",
+    url: "/api/register",
+    data: data,
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    dataType: "json",
+    success: function success(data) {
+      console.log(data);
+      $('#registerModal').each(function () {
+        $(this).modal('hide');
+      });
+    } // error: function(error) {
+    //     console.log('error');
+    // }
+
+  });
+});
+$('#loginBtn').on('click', function (e) {
+  //validation
+  var data = $('#loginForm').serialize();
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: "/api/login",
+    data: data,
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    dataType: "json",
+    success: function success(data) {
+      console.log(data); //Do Things Here
+
+      window.localStorage.setItem('access_token', data.access_token);
+    },
+    error: function error(_error) {
+      console.log(_error);
+      alert('Failed to login. Please Try again');
+    }
+  });
+});
 
 /***/ }),
 
@@ -548,6 +493,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function actorModals() {
   return "\n        <div class=\"modal fade\" id=\"actorCreateModal\" tabindex=\"-1\" aria-labelledby=\"actorCreate\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Create New Actor</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"actorCreateForm\" id=\"actorCreateForm\">\n                            <div class=\"form-group\">\n                                <label for=\"fname\" class=\"control-label\">First Name</label>\n                                <input type=\"text\" class=\"form-control\" id=\"fname\" name=\"fname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Last name</label>\n                                <input type=\"text\" class=\"form-control \" id=\"lname\" name=\"lname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"note\">Note</label>\n                                <textarea class=\"form-control\" id=\"note\" name=\"note\" rows=\"3\"></textarea>\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn btn-color\" id=\"actorCreateSave\">Save</button>\n                                <button type=\"button\" class=\"btn cancel\" id=\"data-cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"modal fade\" id=\"actorEditModal\" tabindex=\"-1\" aria-labelledby=\"actorEditModal\" aria-hidden=\"true\"\n            data-backdrop=\"false\">\n            <div class=\"modal-dialog modal-lg\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h1 class=\"modal-title\">Edit Actor</h1>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"actorEditForm\" id=\"actorEditForm\">\n                        <div class=\"form-group\">\n                                <input type=\"hidden\" id=\"id\" name=\"id\" value=\"\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"fname\" class=\"control-label\">First Name</label>\n                                <input type=\"text\" class=\"form-control actorFirstName\" id=\"fname\" name=\"fname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"lname\" class=\"control-label\">Last name</label>\n                                <input type=\"text\" class=\"form-control actorLastName\" id=\"lname\" name=\"lname\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label for=\"note\">Note</label>\n                                <textarea class=\"form-control actorNote\" id=\"note\" name=\"note\" rows=\"3\"></textarea>\n                            </div>\n                            <div class=\"modal-footer\">\n                                <button type=\"submit\" class=\"btn actorEditSave btn-color\" \n                                    id=\"actorEditSave\">Save</button>\n                                    \n                                <button type=\"button\" class=\"btn cancel\" data-dismiss=\"modal\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n        ";
+}
+
+/***/ }),
+
+/***/ "./resources/js/modals/authM.js":
+/*!**************************************!*\
+  !*** ./resources/js/modals/authM.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ authModals
+/* harmony export */ });
+function authModals() {
+  return "\n    <div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" aria-labelledby=\"login\" aria-hidden=\"true\"\n        data-backdrop=\"false\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h1 class=\"modal-title\">LOGIN</h1>\n\t\t\t        <button type=\"button\" class=\"close\" data-bs-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                </div>\n                <div class=\"modal-body\">\n                    <form id=\"loginForm\">\n                        <div class=\"form-group\">\n                            <label for=\"name\" class=\"control-label\">Name</label>\n                            <input type=\"email\" class=\"form-control\" id=\"logemail\" name=\"email\" placeholder=\"Email\">\n                        </div>\n                        <br>    \n                            <div class=\"form-group\">\n                                <label for=\"password\" class=\"control-label\">Password</label>\n                                <input type=\"password\" class=\"form-control\" id=\"logpassword\" name=\"password\" placeholder=\"Password\">\t\t\t\t\t\n                            </div>\n                            <br>\n                            <div class=\"form-group\">\n                                <input type=\"submit\" class=\"btn btn-primary\" id=\"loginBtn\" value=\"Login\">\n                            </div>\n                        </form>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <a href=\"#\">Forgot Password?</a>\n                    </div>\n                </div>  \n            </div>  \n        </div>\n    \n\n<div id=\"registerModal\" class=\"modal fade\">\n\t<div class=\"modal-dialog modal-login\">\n\t\t<div class=\"modal-content\">\n\t\t\t<div class=\"modal-header\">\t\t\t\t\n\t\t\t\t<h1 class=\"modal-title\">REGISTER</h1>\n\t\t\t\t<button type=\"button\" class=\"close\" data-bs-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<form id=\"registerForm\">\n                    <div class=\"form-group\">\n                        <label for=\"name\" class=\"control-label\">Name</label>\n\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"regname\" name=\"name\">\n                    </div>\n                    <br>\n                    <div class=\"form-group\">\n                        <label for=\"email\" class=\"control-label\">Email</label>\n\t\t\t\t\t\t<input type=\"email\" class=\"form-control\" id=\"regemail\" name=\"email\">\n\t\t\t\t\t</div>\n                    <br>\n\t\t\t\t\t<div class=\"form-group\">\n                        <label for=\"password\" class=\"control-label\">Password</label>\n\t\t\t\t\t\t<input type=\"password\" class=\"form-control\" id=\"regpassword\" name=\"password\">\t\t\t\t\t\n\t\t\t\t\t</div>\n                    <br>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<input type=\"submit\" class=\"btn btn-primary\" id=\"registerBtn\" value=\"Register\">\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t<div class=\"modal-footer\">\n\t\t\t\t<a href=\"#\">Already Have an Account?</a>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>     \n    ";
 }
 
 /***/ }),
@@ -678,7 +639,7 @@ var movie = {
         type: "GET",
         url: "/api/producer",
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success(response) {
@@ -691,7 +652,7 @@ var movie = {
         type: "GET",
         url: "/api/genre",
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success(response) {
@@ -718,7 +679,7 @@ var movie = {
         url: "/api/movie",
         data: movie,
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success(movie) {
@@ -742,7 +703,7 @@ var movie = {
         type: 'GET',
         url: '/api/movie/' + id + '/edit',
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         success: function success(movie) {
           $('#id').val(movie.id);
@@ -804,7 +765,7 @@ var movie = {
         url: "/api/movie/" + id,
         data: moviedata,
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success() {
@@ -832,7 +793,7 @@ var movie = {
           type: "DELETE",
           url: "/api/movie/" + id,
           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'Authorization': 'Bearer ' + localStorage.getItem('access_token')
           },
           dataType: "json",
           success: function success(data) {
@@ -868,7 +829,7 @@ var producer = {
     var template = "\n        <thead>\n            <tr>\n                <th>ID</th>\n                <th>Producer Name</th>\n                <th>Email</th>\n                <th>Actions</th>\n            </tr>\n        </thead>\n        <tbody id=\"producerData\"></tbody>\n    ";
     var title = "<h1> Producers </h1>";
     var headtitle = "<title> Producers </title>";
-    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-toggle=\"modal\" data-target=\"#producerCreateModal\"> Add New Producer </button>";
+    var createbtn = "<button type=\"button\" class=\"btn btn-color\" data-bs-toggle=\"modal\" data-bs-target=\"#producerCreateModal\"> Add New Producer </button>";
     $('#headtitle').html(headtitle);
     $('#title').html(title);
     $('#createbtn').html(createbtn);
@@ -876,7 +837,7 @@ var producer = {
     $('#content').append(_modals_producerM__WEBPACK_IMPORTED_MODULE_0__.default); //View
 
     response.forEach(function (producer) {
-      $('#producerData').append("\n                <tr>\n                    <td>".concat(producer.id, "</td>\n                    <td>").concat(producer.name, "</td>\n                    <td>").concat(producer.email, "</td>\n                    <td>\n                        <i class=\"fas fa-edit producerEditIcon\" data-toggle=\"modal\" \n                            data-target=\"#producerEditModal\" id=\"").concat(producer.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt producerDeleteIcon\" id=\"").concat(producer.id, "\"></i>\n                    </td>\n                </tr>\n            "));
+      $('#producerData').append("\n                <tr>\n                    <td>".concat(producer.id, "</td>\n                    <td>").concat(producer.name, "</td>\n                    <td>").concat(producer.email, "</td>\n                    <td>\n                        <i class=\"fas fa-edit producerEditIcon\" data-bs-toggle=\"modal\" \n                            data-bs-target=\"#producerEditModal\" id=\"").concat(producer.id, "\"></i> | \n                        \n                        <i class=\"fas fa-trash-alt producerDeleteIcon\" id=\"").concat(producer.id, "\"></i>\n                    </td>\n                </tr>\n            "));
     });
     var valcreate = $('#producerCreateForm').validate({
       rules: {
@@ -918,7 +879,7 @@ var producer = {
         url: "/api/producer",
         data: producer,
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success(producer) {
@@ -928,7 +889,7 @@ var producer = {
             input.val('');
           });
           $('#producerCreateModal').hide();
-          $('#producerData').append("\n                        <tr>\n                            <td>".concat(producer.id, "</td>\n                            <td>").concat(producer.name, "</td>\n                            <td>").concat(producer.email, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit producerEditIcon\" \n                                    data-toggle=\"modal\" data-target=\"#producerEditModal\"\n                                    id=\"").concat(producer.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt producerDeleteIcon\" \n                                    id=\"").concat(producer.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
+          $('#producerData').append("\n                        <tr>\n                            <td>".concat(producer.id, "</td>\n                            <td>").concat(producer.name, "</td>\n                            <td>").concat(producer.email, "</td>\n                            <td>\n                                <a><i class=\"fas fa-edit producerEditIcon\" \n                                    data-bs-toggle=\"modal\" data-bs-target=\"#producerEditModal\"\n                                    id=\"").concat(producer.id, "\"></a></i> | \n\n                                <i class=\"fas fa-trash-alt producerDeleteIcon\" \n                                    id=\"").concat(producer.id, "\"></i>\n                            </td>\n                        </tr>\n                    "));
         } // error: function (response) {
         //     console.log(response);
         // },
@@ -943,7 +904,7 @@ var producer = {
         type: 'GET',
         url: '/api/producer/' + id + '/edit',
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         success: function success(producer) {
           $('#id').val(producer.id);
@@ -986,7 +947,7 @@ var producer = {
         url: "/api/producer/" + id,
         data: producerdata,
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         dataType: "json",
         success: function success() {
@@ -1014,7 +975,7 @@ var producer = {
           type: "DELETE",
           url: "/api/producer/" + id,
           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'Authorization': 'Bearer ' + localStorage.getItem('access_token')
           },
           dataType: "json",
           success: function success(data) {
