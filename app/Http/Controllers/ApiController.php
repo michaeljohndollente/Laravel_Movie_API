@@ -15,7 +15,6 @@ class ApiController extends Controller
         $newuser = $request->all();     
         $newuser['password'] = Hash::make($newuser['password']);
         $user = User::create($newuser); 
-
         return response()->json($user);
     }
 

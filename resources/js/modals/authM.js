@@ -24,7 +24,7 @@ export default function authModals() {
                                 <input type="submit" class="btn btn-primary" id="loginBtn" value="Login">
                             </div>
                         </form>
-                    </div>
+                    </div>              
                     <div class="modal-footer">
                         <a href="#">Forgot Password?</a>
                     </div>

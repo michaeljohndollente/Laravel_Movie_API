@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'actor_id', 'movie_id'];
 
-    public function actor()
+    public function actor() 
     {
-        return $this->belongsTo(Actor::class);
+        return $this->belongsTo('App\Models\Actor', 'actor_id');
     }
 
     public function movie()
     {
-        return $this->belongsTo(Movie::class);
+        return $this->belongsTo('App\Models\Movie', 'movie_id');
     }
 }

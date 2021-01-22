@@ -196,8 +196,8 @@ const movie = {
                     $('.movieTitle').val(movie.title);
                     $('.movieDescription').val(movie.description);
                     $('.movieRelease').val(movie.release);
-                    $('.movieProducer').val(movie.producer['name']);
-                    $('.actorGenre').val(movie.genre['name']);
+                    $('.movieProducer').val(movie.producer.name);
+                    $('.movieGenre').val(movie.genre.name);
                 },
                 // error: function (response) {
                 //     console.log(response);

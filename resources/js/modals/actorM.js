@@ -1,7 +1,7 @@
 export default function actorModals() {
     return `
         <div class="modal fade" id="actorCreateModal" tabindex="-1" aria-labelledby="actorCreate" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -23,7 +23,7 @@ export default function actorModals() {
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-color" id="actorCreateSave">Save</button>
-                                <button type="button" class="btn cancel" id="data-cancel" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn cancel" id="data-cancel" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -32,7 +32,7 @@ export default function actorModals() {
         </div>
         
         <div class="modal fade" id="actorEditModal" tabindex="-1" aria-labelledby="actorEditModal" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -59,7 +59,7 @@ export default function actorModals() {
                                 <button type="submit" class="btn actorEditSave btn-color" 
                                     id="actorEditSave">Save</button>
                                     
-                                <button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn cancel" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>

@@ -3,11 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
-use App\Models\Actor;
-use App\Models\Genre;
-use App\Models\Role;
-use App\Models\Rate;
-use App\Models\Producer;
 
 class MovieController extends Controller
 {

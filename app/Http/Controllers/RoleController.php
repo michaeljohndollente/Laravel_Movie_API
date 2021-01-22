@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Role;
 
 class RoleController extends Controller
 {
@@ -23,7 +24,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $role = Role::with('actor', 'movie')->get();
+        return response()->json($role);
     }
 
     /**
@@ -34,7 +36,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = Role::create($request->all());
+        return response()->json($role);
     }
 
     /**
@@ -43,9 +46,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $id, $movie)
     {
-        //
+        $role = Role::find($id);
+        return response()->json($role);
     }
 
     /**
@@ -68,7 +72,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::find($id);
+        $role = $role->update($request->all());
+        return response()->json($role);
     }
 
     /**
@@ -79,6 +85,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::find($id)->delete();
+        return response()->json($role); 
     }
 }
