@@ -18,7 +18,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Movie::with('genre', 'producer')->get();
+        $movie = Movie::with('genre', 'producer')->get();
+        return response()->json($movie);
     }
 
     /**
@@ -89,6 +90,6 @@ class MovieController extends Controller
     public function destroy(Request $movie, $id)
     {
         $movie = Movie::find($id)->delete();
-        return response()->json($movie);
+        return response()->json($movie);    
     }
 }
