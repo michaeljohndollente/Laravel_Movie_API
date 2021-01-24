@@ -1,7 +1,7 @@
 export default function genreModals() {
     return `
     <div class="modal fade" id="genreCreateModal" tabindex="-1" aria-labelledby="genreCreate" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -15,7 +15,7 @@ export default function genreModals() {
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-color" id="genreCreateSave">Save</button>
-                                <button type="button" class="btn cancel" id="data-cancel" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn cancel" id="data-cancel" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -24,7 +24,7 @@ export default function genreModals() {
         </div>
         
         <div class="modal fade" id="genreEditModal" tabindex="-1" aria-labelledby="genreEditModal" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -42,7 +42,7 @@ export default function genreModals() {
                             <div class="modal-footer">
                                 <button type="submit" class="btn genreEditSave btn-color" 
                                     id="genreEditSave">Save</button>
-                                <button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn cancel" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>

@@ -14,7 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $role = Role::with('movie', 'actor')->get();
+        return response()->json($role);
     }
 
     /**

@@ -1,7 +1,7 @@
 export default function producerModals() {
     return `
     <div class="modal fade" id="producerCreateModal" tabindex="-1" aria-labelledby="producerCreate" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -19,7 +19,7 @@ export default function producerModals() {
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-color" id="producerCreateSave">Save</button>
-                                <button type="button" class="btn cancel" id="data-cancel" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn cancel" id="data-cancel" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -28,7 +28,7 @@ export default function producerModals() {
         </div>
         
         <div class="modal fade" id="producerEditModal" tabindex="-1" aria-labelledby="producerEditModal" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -50,7 +50,7 @@ export default function producerModals() {
                             <div class="modal-footer">
                                 <button type="submit" class="btn producerEditSave btn-color" 
                                     id="producerEditSave">Save</button>
-                                <button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn cancel" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>

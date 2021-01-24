@@ -1,6 +1,6 @@
 import modal4role from './modals/roleM';
 
-const movie = {
+const role = {
     show(response) {
         let template = `
         <thead>
@@ -30,7 +30,7 @@ const movie = {
                 <tr>
                     <td>${role.id}</td>
                     <td>${role.name}</td>
-                    <td>${role.actor.name}</td>
+                    <td>${role.actor.fname}</td>
                     <td>${role.movie.title}</td>
                     <td>
                         <i class="fas fa-edit roleEditIcon" data-bs-toggle="modal" 
@@ -83,8 +83,8 @@ const movie = {
                 dataType: "json",
                 success: function (response) {
                     response.forEach(actor => {
-                        $('#ProducerIDName').append(`
-                            <option value="${actor['id']}">${actor['name']}</option>
+                        $('#ActorIDName').append(`
+                            <option value="${actor['id']}">${actor['fname']}</option>
                         `)
                     });
                 }
@@ -98,8 +98,8 @@ const movie = {
                 dataType: "json",
                 success: function (response) {
                     response.forEach(movie => {
-                        $('#GenreIDName').append(`
-                            <option value="${movie['id']}">${movie['name']}</option>
+                        $('#MovieIDName').append(`
+                            <option value="${movie['id']}">${movie['title']}</option>
                         `)
                     });
                 }
@@ -107,8 +107,8 @@ const movie = {
         });
 
         $('#roleCreateModal').on('hidden.bs.modal', function(e){
-            $('#actorIDName').empty();
-            $('#movieIDName').empty();
+            $('#ActorIDName').empty();
+            $('#MovieIDName').empty();
         });
         
         //Create
@@ -136,8 +136,8 @@ const movie = {
                         <tr>
                             <td>${role.id}</td>
                             <td>${role.name}</td>
-                            <td>${role.actor.name}</td>
-                            <td>${role.movie.name}</td>
+                            <td>${role.actor.fname}</td>
+                            <td>${role.movie.title}</td>
                             <td>
                                 <a><i class="fas fa-edit roleEditIcon" 
                                     data-bs-toggle="modal" data-bs-target="#roleEditModal"
@@ -169,7 +169,7 @@ const movie = {
                 success: function (role) {
                     $('#id').val(role.id);
                     $('.roleName').val(role.name);
-                    $('.roleActor').val(role.actor.name);
+                    $('.roleActor').val(role.actor.fname);
                     $('.roleMovie').val(role.movie.title);
                 },
                 // error: function (response) {

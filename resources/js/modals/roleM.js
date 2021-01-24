@@ -1,16 +1,16 @@
 export default function rolemodals() {
     return `
         <div class="modal fade" id="roleCreateModal" tabindex="-1" aria-labelledby="roleCreate" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title">Create New Movie</h1>
+                        <h1 class="modal-title">Create New Role</h1>
                     </div>
                     <div class="modal-body">
                         <form class="roleCreateForm" id="roleCreateForm">
                         <div class="form-group">
-                            <label for="title" class="control-label">Title</label>
+                            <label for="title" class="control-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" value="">
                         </div>
                         <div class="row">
@@ -38,7 +38,7 @@ export default function rolemodals() {
         </div>
         
         <div class="modal fade" id="roleEditModal" tabindex="-1" aria-labelledby="roleEditModal" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">

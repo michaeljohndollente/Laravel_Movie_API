@@ -175,16 +175,12 @@ const movie = {
                         </tr>
                     `);
                 },
-                // error: function (response) {
-                //     console.log(response);
-                // },
             });
         });
 
         //Edit
         $('.movieEditIcon').on('click', function (e) {
             var id = $(e.currentTarget).attr('id');
-            // console.log(id);
             $.ajax({
                 type: 'GET',
                 url: '/api/movie/' + id + '/edit',
@@ -196,12 +192,9 @@ const movie = {
                     $('.movieTitle').val(movie.title);
                     $('.movieDescription').val(movie.description);
                     $('.movieRelease').val(movie.release);
-                    $('.movieProducer').val(movie.producer.name);
-                    $('.movieGenre').val(movie.genre.name);
+                    $('.movieProducer').val(movie.genre.name);
+                    $('.movieGenre').val(movie.producer.name);
                 },
-                // error: function (response) {
-                //     console.log(response);
-                // },
             });
         });
 
@@ -264,9 +257,6 @@ const movie = {
                         }
                     })
                 },
-                // error: function (error) {
-                //     console.log(error);
-                // }
             });
         });
 
@@ -277,7 +267,6 @@ const movie = {
             e.preventDefault();
             var id = this.id;
             var $tr = $(this).closest('tr')
-            // console.log(id);
             if (confirm(`Are you sure you want to delete Movie Number ${id}?`)) {
                 $.ajax({
                     type: "DELETE",
@@ -287,12 +276,8 @@ const movie = {
                     },
                     dataType: "json",
                     success: function (data) {
-                        // console.log(data);
                         $tr.remove();
                     },
-                    // error:function(data){
-                    //     console.log('Error:',data);
-                    // }
                 })
             }
 

@@ -1,7 +1,7 @@
 export default function authModals() {
     return `
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="login" aria-hidden="true"
-        data-backdrop="false">
+        data-bs-backdrop="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

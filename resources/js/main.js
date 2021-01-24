@@ -3,6 +3,7 @@ import genre from './genre';
 import producer from './producer';
 import movie from './movie';
 import auth from './modals/authM'
+import role from './role'
 
 $(document).ready(function () {
     $('.linkIndex').on('click', (function (e) {
@@ -34,6 +35,10 @@ $(document).ready(function () {
                         producer.show(response)
                         break;
 
+                    case 'role':
+                        role.show(response)
+                        break;
+
                     default:
                         break;
                 }
@@ -43,11 +48,11 @@ $(document).ready(function () {
     $(".draggable").draggable();
 });
 
-$('#content').append(auth);    
+$('#content').append(auth);
 
-    $('#registerBtn').on('click', function (e) {
-        var data = $('#registerForm').serialize();
-        $.ajax({
+$('#registerBtn').on('click', function (e) {
+    var data = $('#registerForm').serialize();
+    $.ajax({
         type: "POST",
         url: "/api/register",
         data: data,
@@ -55,24 +60,20 @@ $('#content').append(auth);
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         dataType: "json",
-        success: function(data) {
+        success: function (data) {
             console.log(data);
             $('#registerModal').each(function () {
-              $(this).modal('hide');
+                $(this).modal('hide');
             });
 
         },
-        // error: function(error) {
-        //     console.log('error');
-        // }
     });
 });
 
-    $('#loginBtn').on('click', function (e) {
-      //validation
-      var data = $('#loginForm').serialize();
-      console.log(data);
-      $.ajax({
+$('#loginBtn').on('click', function (e) {
+    var data = $('#loginForm').serialize();
+    console.log(data);
+    $.ajax({
         type: "POST",
         url: "/api/login",
         data: data,
@@ -80,15 +81,13 @@ $('#content').append(auth);
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         dataType: "json",
-        success: function(data) {
+        success: function (data) {
             console.log(data);
-            //Do Things Here
             window.localStorage.setItem('access_token', data.access_token);
         },
-        error: function(error) {
+        error: function (error) {
             console.log(error);
             alert('Failed to login. Please Try again');
         }
-      });
-
     });
+});

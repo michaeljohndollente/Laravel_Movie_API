@@ -1,7 +1,7 @@
 export default function moviesModals() {
     return `
         <div class="modal fade" id="movieCreateModal" tabindex="-1" aria-labelledby="movieCreate" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -47,7 +47,7 @@ export default function moviesModals() {
         </div>
         
         <div class="modal fade" id="movieEditModal" tabindex="-1" aria-labelledby="movieEditModal" aria-hidden="true"
-            data-backdrop="false">
+            data-bs-backdrop="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
